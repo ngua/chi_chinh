@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    image: chi_chinh
+  redis:
+    image: redis:5.0-alpine
+    ports:
+      - "6380:6380"

@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.env*
+media/
+static/img/*
+static/styles/css/*
+static/src/node_modules
+static/src/package-lock.json
+static/src/.stylelintrc.json

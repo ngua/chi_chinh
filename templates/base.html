@@ -1,0 +1,122 @@
+{% load static i18n chi_chinh_extras %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="ALL">
+    <meta name="keywords" content="cooking, vietnam, vietnamese, food">
+    <meta name="copyright" content="tnhh raft">
+    <meta name="description" content="The home of Chị Chinh's cooking and recipe blog.">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/css/app.css' %}" />
+    <title>{% block title %} {% endblock %} • Chị Chinh </title>
+  </head>
+  <body>
+    <header id="header" uk-sticky="show-on-up: true; animation: uk-animation-fade; media: @l">
+      <div class="uk-container">
+        <nav id="navbar" uk-navbar="mode: click;">
+          <div class="uk-navbar-left nav-overlay uk-visible@m">
+            <ul class="uk-navbar-nav">
+              <li>
+                <a class="uk-button-text" href="{% url 'index' %}" title="Subscribe">Home</a>
+              </li>
+              <li>
+                <a class="uk-button-text" href="#" title="Sign Up">Recipes</a>
+              </li>
+              <li>
+                <a class="uk-button uk-button-text" type="button">More</a>
+                <div uk-dropdown>
+                  <ul class="uk-nav uk-dropdown-nav">
+                    <li><a href="#">Categories</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="uk-navbar-center nav-overlay">
+            <a id="brand" class="uk-navbar-item uk-logo" href="{% url 'index' %}" title="Logo">Chị Chinh </a>
+          </div>
+          <div class="uk-navbar-right nav-overlay">
+            <a class="uk-visible@s nav-links" href="#" uk-icon="youtube"></a>
+            <a class="uk-visible@s nav-links" href="#" uk-icon="facebook"></a>
+            <a class="uk-navbar-toggle uk-visible@m" data-uk-search-icon data-uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+            <div class="uk-navbar-item">
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+              <form action="{% url 'set_language' %}" id="form_{{ language.code}}" class="" method="POST" style="">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.get_full_path|slice_url }}">
+                <input name="language" type="hidden" value="{{ language.code }}">
+              </form>
+              <button type="submit" form="form_{{ language.code}}" class="uk-visible@s uk-button uk-button-text uk-margin-right" {% if language.code == LANGUAGE_CODE %}disabled{% endif %}>{{ language.code }}</button>
+              {% endfor %}
+              <a class="uk-navbar-toggle uk-hidden@m" uk-toggle uk-navbar-toggle-icon href="#offcanvas-nav"></a>
+            </div>
+          </div>
+          <div class="nav-overlay uk-navbar-left uk-flex-1" hidden>
+            <div class="uk-navbar-item uk-width-expand">
+              <form class="uk-search uk-search-navbar uk-width-1-1">
+                <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+              </form>
+            </div>
+            <a class="uk-navbar-toggle" data-uk-close data-uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="uk-container">
+      <nav id="sub-nav">
+        <ul class="uk-subnav uk-flex uk-flex-between">
+          <li><button class="uk-button uk-button-text" href="#">Recipes</button></li>
+          <li><button class="uk-button uk-button-text" href="#">Categories</button></li>
+          <li><button class="uk-button uk-button-text" href="#">Contact</button></li>
+          <li><button class="uk-button uk-button-text" href="#">About</button></li>
+        </ul>
+      </nav>
+    </div>
+    {% block content %}{% endblock %}
+    <div id="offcanvas-nav" uk-offcanvas>
+      <div class="uk-background-muted uk-dark uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
+        <button class="uk-offcanvas-close uk-close" type="button" uk-close></button>
+        <ul class="uk-nav uk-dark">
+          <li><a href="#">Home</a></li>
+          <li class="uk-nav-divider"></li>
+          <li><a href="#">Recipes</a></li>
+          <li class="uk-nav-divider"></li>
+          <li><a href="#">About</a></li>
+          <li class="uk-nav-divider"></li>
+        </ul>
+        <h3>Chị Chinh</h3>
+        <div class="uk-inline">
+          <a class="" href="#" uk-icon="youtube"></a>
+          <a class="" href="#" uk-icon="facebook"></a>
+        </div>
+      </div>
+    </div>
+    <footer class="uk-section uk-section-small uk-section-muted">
+      <div class="uk-container">
+        <div class="uk-grid uk-grid-large" uk-grid>
+          <div class="uk-width-1-2@m">
+            <p class="uk-text-small">&copy; 2020 Chị Chinh</p>
+            <div class="uk-inline">
+              <a href="#" class="uk-icon-button" uk-icon="youtube"></a>
+              <a href="#" class="uk-icon-button" uk-icon="facebook"></a>
+              <a href="#" class="uk-icon-button" uk-icon="mail"></a>
+            </div>
+          </div>
+          <div class="uk-width-1-2@m">
+            <div class="uk-inline">
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+  </body>
+</html>
