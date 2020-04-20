@@ -34,6 +34,10 @@ class Recipe(models.Model):
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
 
+    @staticmethod
+    def all_categories():
+        return Category.objects.filter(recipe__isnull=False)
+
     def __repr__(self):
         return f"{self.__class__.__name__}'({self.name})'"
 

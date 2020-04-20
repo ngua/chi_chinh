@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
+    'rest_framework',
+    'django_filters',
+    'webpack_loader',
     'recipes.apps.RecipesConfig'
 ]
 
@@ -151,3 +154,21 @@ STATICFILES_FINDERS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 RECIPE_PIC_PATH = 'recipe'
+
+# Webpack config for react components
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': os.path.join('src', 'bundles/'),
+        'STATS_FILE': os.path.join(BASE_DIR, 'static', 'src', 'webpack-stats.json'),
+    }
+}
+
+# Rest framework settings
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer'
+    ]
+}

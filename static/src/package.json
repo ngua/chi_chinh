@@ -4,16 +4,38 @@
   "description": "",
   "main": "index.js",
   "config": {
-      "scss_src": "styles/scss/app.scss",
-      "scss_dest": "../styles/css/"
+    "scss_src": "styles/scss/app.scss",
+    "scss_dest": "../styles/css/"
   },
   "scripts": {
     "scss:compile": "node-sass -o $npm_package_config_scss_dest $npm_package_config_scss_src",
-    "scss:compile:watch": "node-sass -o $npm_package_config_scss_dest $npm_package_config_scss_src --watch"
+    "scss:compile:watch": "node-sass -o $npm_package_config_scss_dest $npm_package_config_scss_src --watch",
+    "webpack:compile:prod": "webpack --mode production",
+    "webpack:compile:dev": "webpack --mode development",
+    "webpack:compile:watch:prod": "webpack --watch --mode production",
+    "webpack:compile:watch:dev": "webpack --watch --mode development"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "node-sass": "^4.13.1"
-  }
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.2",
+    "node-sass": "^4.13.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-loader-spinner": "^3.1.14",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.4",
+    "uikit": "^3.4.1",
+    "webpack": "^4.42.1",
+    "webpack-bundle-tracker": "^0.4.3",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {}
 }
