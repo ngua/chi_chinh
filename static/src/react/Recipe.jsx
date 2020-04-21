@@ -7,10 +7,10 @@ UIkit.use(Icons);
 class Recipe extends React.Component {
   render() {
     const recipe = this.props.recipe;
-    const datePosted = new Date(recipe['date_posted'])
+    const datePosted = new Date(recipe.created);
     const categories = recipe.categories;
     return (
-      <div>
+      <div className="uk-animation-fade">
         <div className="uk-card uk-card-medium uk-card-hover">
           <div className="uk-card-header">
             <div className="uk-card-media-top">
@@ -18,21 +18,22 @@ class Recipe extends React.Component {
             </div>
           </div>
           <div className="uk-card-body uk-padding-remove-top">
-            <div className="uk-grid uk-grid-small" uk-grid>
+            <div className="uk-grid uk-grid-small" uk-grid="true">
               <div className="uk-width-expand">
                 <h3 className="heading uk-width-2-3 uk-card-title">
                   {recipe.name}
                 </h3>
               </div>
-              <div class="uk-width-auto uk-text-right uk-text-muted">
-                <a href="#" ratio="1.2" uk-icon="youtube"/>
+              <div className="uk-width-auto uk-text-right uk-text-muted">
+                <a href="#" className="uk-margin-right" ratio="1.2" uk-icon="chevron-double-right"/>
+                <a href="#" className="uk-margin-right" ratio="1.2" uk-icon="youtube"/>
               </div>
             </div>
             <p className="uk-text-meta">Posted on { datePosted.toLocaleDateString() }</p>
             <hr />
             {categories.map((category, i) => {
               return (
-                <div key={i} class="uk-label uk-margin-small-right">
+                <div key={i} className="uk-label uk-margin-small-right">
                   {category}
                 </div>
               )

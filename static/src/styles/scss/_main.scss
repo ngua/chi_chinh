@@ -61,9 +61,10 @@ a {
   div {
     background-color: $bg-pink;
 
-    a, h3, span {
+    a, h3, span, button {
       color: #8c8c8c;
     }
+
   }
 }
 
@@ -92,6 +93,11 @@ a {
 
 .uk-button {
   border-radius: 10px;
+
+  &.active {
+    background-color: $hl-pink;
+    color: white;
+  }
 }
 
 .heading {
@@ -119,3 +125,4 @@ img.rounded {
   border: 1px solid black;
   border-radius: 50%;
 }
+

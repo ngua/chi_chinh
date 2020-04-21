@@ -32,13 +32,13 @@
             <article class="uk-section-small uk-section-default recipe">
               <span><h3 class="">{{ recipe.name }}</h3></span>
               <div>
-                {% for category in recipe.categories.all|slice:":3" %}
+                {% for category in recipe.categories.all|slice:":6" %}
                 <div class="uk-label">
                   {{ category }}
                 </div>
                 {% endfor %}
               </div>
-              <p class="uk-article-meta">Posted on {{ recipe.date_posted|date:'F d, Y'}}</p>
+              <p class="uk-article-meta">Posted on {{ recipe.created|date:'F d, Y'}}</p>
               <p>{{ recipe.description|truncatewords:5|safe }}</p>
               <div class="uk-grid-small uk-child-width-auto" uk-grid>
                 <div>

@@ -22,7 +22,7 @@
                 <a class="uk-button-text" href="{% url 'index' %}" title="Subscribe">Home</a>
               </li>
               <li>
-                <a class="uk-button-text" href="#" title="Sign Up">Recipes</a>
+                <a class="uk-button-text" href="{% url 'recipes' %}" title="Sign Up">Recipes</a>
               </li>
               <li>
                 <a class="uk-button uk-button-text" type="button">More</a>
@@ -72,7 +72,7 @@
     <div class="uk-container">
       <nav id="sub-nav">
         <ul class="uk-subnav uk-flex uk-flex-between">
-          <li><button class="uk-button uk-button-text" href="#">Recipes</button></li>
+          <li><button class="uk-button uk-button-text" href="{% url 'recipes' %}">Recipes</button></li>
           <li><button class="uk-button uk-button-text" href="#">Categories</button></li>
           <li><button class="uk-button uk-button-text" href="#">Contact</button></li>
           <li><button class="uk-button uk-button-text" href="#">About</button></li>
@@ -84,9 +84,9 @@
       <div class="uk-background-muted uk-dark uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
         <button class="uk-offcanvas-close uk-close" type="button" uk-close></button>
         <ul class="uk-nav uk-dark">
-          <li><a href="#">Home</a></li>
+          <li><a href="{% url 'index' %}">Home</a></li>
           <li class="uk-nav-divider"></li>
-          <li><a href="#">Recipes</a></li>
+          <li><a href="{% url 'recipes' %}">Recipes</a></li>
           <li class="uk-nav-divider"></li>
           <li><a href="#">About</a></li>
           <li class="uk-nav-divider"></li>
