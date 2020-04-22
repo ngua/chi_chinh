@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import DetailView
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Recipe
@@ -32,3 +33,7 @@ class RecipeListAPIView(generics.ListAPIView):
         serializer = CategorySerializer(all_categories, many=True)
         response.data['all'] = serializer.data
         return response
+
+
+class RecipeDetailView(DetailView):
+    model = Recipe

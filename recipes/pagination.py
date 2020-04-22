@@ -2,7 +2,7 @@ from rest_framework.pagination import PageNumberPagination
 
 
 class PageNumberPaginator(PageNumberPagination):
-    page_size = 2
+    page_size = 6
 
     def get_paginated_response(self, data):
         response = super().get_paginated_response(data)

@@ -25,7 +25,7 @@ class Recipe extends React.Component {
                 </h3>
               </div>
               <div className="uk-width-auto uk-text-right uk-text-muted">
-                <a href="#" className="uk-margin-right" ratio="1.2" uk-icon="chevron-double-right"/>
+                <a href={window.location + recipe.slug} className="uk-margin-right" ratio="1.2" uk-icon="chevron-double-right"/>
                 <a href="#" className="uk-margin-right" ratio="1.2" uk-icon="youtube"/>
               </div>
             </div>
