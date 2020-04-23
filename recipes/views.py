@@ -37,3 +37,9 @@ class RecipeListAPIView(generics.ListAPIView):
 
 class RecipeDetailView(DetailView):
     model = Recipe
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(self.object.get_random_related())
+        context['related'] = self.object.get_random_related()
+        return context

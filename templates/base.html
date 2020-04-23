@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="ALL">
     <meta name="keywords" content="cooking, vietnam, vietnamese, food">
-    <meta name="copyright" content="tnhh raft">
     <meta name="description" content="The home of Chị Chinh's cooking and recipe blog.">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/css/app.css' %}" />
@@ -32,6 +31,8 @@
                     <li class="uk-nav-divider"></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">About</a></li>
+                    <li><a href="#">Channel</a></li>
+                    <li><a href="#">Subscribe</a></li>
                   </ul>
                 </div>
               </li>
@@ -43,7 +44,7 @@
           <div class="uk-navbar-right nav-overlay">
             <a class="uk-visible@s nav-links" href="#" uk-icon="youtube"></a>
             <a class="uk-visible@s nav-links" href="#" uk-icon="facebook"></a>
-            <a class="uk-navbar-toggle uk-visible@m" data-uk-search-icon data-uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+            <a class="uk-navbar-toggle uk-visible@m" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
             <div class="uk-navbar-item">
               {% get_current_language as LANGUAGE_CODE %}
               {% get_available_languages as LANGUAGES %}
@@ -64,18 +65,20 @@
                 <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
               </form>
             </div>
-            <a class="uk-navbar-toggle" data-uk-close data-uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+            <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
           </div>
         </nav>
       </div>
     </header>
     <div class="uk-container">
       <nav id="sub-nav">
-        <ul class="uk-subnav uk-flex uk-flex-between">
-          <li><button class="uk-button uk-button-text" href="{% url 'recipes' %}">Recipes</button></li>
-          <li><button class="uk-button uk-button-text" href="#">Categories</button></li>
-          <li><button class="uk-button uk-button-text" href="#">Contact</button></li>
-          <li><button class="uk-button uk-button-text" href="#">About</button></li>
+        <ul class="uk-subnav uk-flex uk-flex-between@m uk-visible@m">
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'index' %}">Home</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'recipes' %}">Recipes</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">Contact</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">About</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">Channel</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">Subscribe</a></li>
         </ul>
       </nav>
     </div>

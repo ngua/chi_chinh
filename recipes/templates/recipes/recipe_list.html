@@ -2,9 +2,9 @@
 {% load render_bundle from webpack_loader %}
 {% block title %}Recipes{% endblock %}
 {% block content %}
-<section class="uk-section uk-section-default uk-padding-small" uk-height-viewport="expand: true">
+<section id="top" class="uk-section uk-section-default uk-padding-small" uk-height-viewport="expand: true">
   <div class="uk-container  uk-margin uk-container-large">
-    <h1 class="heading">Recipes</h1>
+    <h1 class="heading uk-heading-line"><span>Recipes</span></h1>
   </div>
   <div id="recipes">
     {% render_bundle 'recipes' %}

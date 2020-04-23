@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
 
+$screen-lg-min: 992px;
 $hl-pink: #f3c1c1;
 $bg-pink: #f6f2f2;
 $dark-pink: #b37972;
-
 $heading-font: 'Bellota', sans-serif;
+
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
 
 @mixin highlight {
   &:hover {
@@ -16,6 +22,7 @@ $heading-font: 'Bellota', sans-serif;
 a {
   @include highlight;
   color: #b37972;
+
 }
 
 #header {
@@ -64,7 +71,6 @@ a {
     a, h3, span, button {
       color: #8c8c8c;
     }
-
   }
 }
 
@@ -73,6 +79,31 @@ a {
     letter-spacing: .2em;
     font-size: .8em;
   }
+}
+
+#subscribe {
+  position: absolute;
+  top: 0;
+  border-radius: 4px;
+  background: #d59f9f;
+  padding: 7px;
+  position: absolute;
+  bottom: 0;
+
+  span {
+    vertical-align: middle;
+    padding-bottom: 12px;
+    color: white;
+    letter-spacing: .2em;
+    font-size: .8em;
+  }
+}
+
+#categories {
+  @include lg {
+    margin-left: 0px;
+  }
+  margin-left: 50px;
 }
 
 .nav-links {
@@ -93,16 +124,12 @@ a {
 
 .uk-button {
   border-radius: 10px;
-
-  &.active {
-    background-color: $hl-pink;
-    color: white;
-  }
 }
 
 .heading {
   color: #7b7b7b;
   font-family: $heading-font;
+  font-weight: 600;
 }
 
 article.recipe {
@@ -126,3 +153,52 @@ img.rounded {
   border-radius: 50%;
 }
 
+.related {
+  color: $dark-pink;
+  font-weight: 700;
+}
+
+.sub-nav {
+    padding: 14px;
+
+  ul {
+    background-color: #f8f8f8;
+    padding: 10px 10px 15px 10px;
+
+    li {
+      a {
+        padding: 10px;
+
+        &.parent {
+          font-family: $heading-font;
+          font-weight: 600;
+          font-size: 17px;
+          width: 90%;
+          border-bottom: .12rem dashed #564949;
+        }
+      }
+      ul li {
+        list-style: disclosure-closed;
+        margin-left: 20px;
+
+        a {
+          &.child {
+            padding: 5px;
+            font-weight: 600;
+
+            &.active {
+              color: white;
+              background-color: $dark-pink;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.order-by {
+  &.active {
+    color: $dark-pink;
+  }
+}

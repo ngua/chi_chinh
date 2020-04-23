@@ -172,3 +172,9 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer'
     ]
 }
+
+VIRTUAL_HOST = os.environ.get('VIRTUAL_HOST', '').split(',')[0]
+
+# Settings allowed to be exported to templates
+
+SETTINGS_EXPORT = ('VIRTUAL_HOST',)

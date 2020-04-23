@@ -11,7 +11,7 @@
           <span>CHỊ CHINH'S KITCHEN</span>
           <h1 class="uk-margin-top uk-margin-small-bottom uk-margin-remove-adjacent">AUTHENTIC COOKING</h1>
           <p>New recipes every week!</p>
-          <a href="#" class="uk-button uk-button-default uk-margin-top">See More</a>
+          <a href="{% url 'recipes' %}" class="uk-button uk-button-default uk-margin-top">See More</a>
           <a href="#" class="uk-button uk-button-default uk-margin-top">Subscribe</a>
         </div>
       </div>
@@ -42,7 +42,7 @@
               <p>{{ recipe.description|truncatewords:5|safe }}</p>
               <div class="uk-grid-small uk-child-width-auto" uk-grid>
                 <div>
-                  <a class="uk-button uk-button-text" href="#">See more</a>
+                  <a class="uk-button uk-button-text" href="{% url 'recipes' %}">See more</a>
                 </div>
                 <div>
                   <a class="" href="#" uk-icon="youtube"></a>
@@ -54,7 +54,7 @@
         {% endfor %}
         <hr>
         <div>
-          <button class="uk-button uk-button-text uk-text-muted">See more >></button>
+          <a class="uk-button uk-button-text uk-text-muted" href="{% url 'recipes' %}">See more >></a>
         </div>
       </div>
       <div class="uk-width-1-3@m">

@@ -1,11 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
 import Loader from 'react-loader-spinner';
-import CategoryButton from './CategoryButton';
+import Categories from './Categories';
 import Recipe from './Recipe';
 import Pagination from './Pagination';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
+UIkit.use(Icons);
 axios.defaults.baseURL = `${window.origin}/api/`;
 
 class RecipeList extends React.Component {
@@ -71,6 +74,14 @@ class RecipeList extends React.Component {
     });
   }
 
+  clearFilters = (e) => {
+    this.setState({
+      selected: [],
+    }, () => {
+      this.fetchRecipes();
+    })
+  }
+
   componentDidMount() {
     this.fetchRecipes();
   }
@@ -79,31 +90,24 @@ class RecipeList extends React.Component {
     this.signal.cancel();
   }
 
-  renderCategories(categories) {
-    const selected = this.state.selected;
-    return (
-      <ul className="uk-subnav uk-flex uk-flex-center uk-padding-large-bottom">
-        { categories.map((category, i) => {
-          return (
-            <li key={i} className="">
-              <CategoryButton
-                name={category}
-                filterCategories={this.filterCategories}
-                current={this.state.selected.includes(category)}
-              />
-            </li>
-          )}
-        )}
-      </ul>
-    )
-  }
-
   renderRecipes(recipes) {
+    if (recipes.length >= 1) {
+      return (
+        <div className="uk-grid uk-flex uk-flex-left uk-grid-medium uk-child-width-1-3@m uk-grid-match" uk-grid="true">
+          { recipes.map(recipe => {
+            return <Recipe key={recipe.id} recipe={recipe} />
+          }) }
+        </div>
+      )
+    }
     return (
-      <div className="uk-grid uk-flex uk-flex-center uk-grid-medium uk-child-width-1-3@m uk-grid-match" uk-grid="true">
-        { recipes.map(recipe => {
-          return <Recipe key={recipe.id} recipe={recipe} />
-        }) }
+      <div className="uk-grid uk-flex-center uk-child-width-1-1@m uk-background-muted" uk-grid="true">
+        <div className="uk-container uk-padding-large uk-text-center uk-height-medium">
+          <div>
+            <h1 className="heading">No matching recipes found!</h1>
+            <p>Try choosing another combination</p>
+          </div>
+        </div>
       </div>
     )
   }
@@ -112,25 +116,36 @@ class RecipeList extends React.Component {
     const {categories, loaded, recipes, numPages } = this.state;
     return (
       <>
-        { loaded ?
-            (
-              <>
-                <div className="uk-container uk-container-large">
-                  { this.renderCategories(categories) }
-                  { this.renderRecipes(recipes) }
-                  { numPages > 1 &&
-                    <Pagination
-                      {...this.state}
-                      offset={3}
-                      fetchRecipes={this.fetchRecipes}
-                    /> }
-                </div>
-              </>
-            ) : (
-              <div className="uk-text-center uk-padding-large">
-                <Loader type='Oval' color='#949494' height={100} width={100} />
+        { loaded ?  (
+          <div className="uk-container uk-container-large">
+            <div className="uk-grid uk-grid-divider" uk-grid="true">
+              <div id="categories" className="uk-width-1-5@m sub-nav">
+                <Categories
+                  categories={this.state.categories}
+                  selected={this.state.selected}
+                  filterCategories={this.filterCategories}
+                  clearFilters={this.clearFilters}
+                />
               </div>
-            ) }
+              <div className="uk-width-4-5@m">
+                { recipes && this.renderRecipes(recipes) }
+              </div>
+            </div>
+            { numPages > 1 &&
+            <Pagination
+              {...this.state}
+              offset={3}
+              fetchRecipes={this.fetchRecipes}
+            /> }
+            <div className="uk-flex uk-flex-center">
+              <a href="#top" uk-totop="true" uk-scroll="true"/>
+            </div>
+          </div>
+        ) : (
+          <div className="uk-text-center uk-padding-large">
+            <Loader type='Oval' color='#949494' height={100} width={100} />
+          </div>
+        ) }
       </>
     )
   }
