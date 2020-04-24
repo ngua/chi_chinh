@@ -54,7 +54,7 @@
                 <input name="next" type="hidden" value="{{ request.get_full_path|slice_url }}">
                 <input name="language" type="hidden" value="{{ language.code }}">
               </form>
-              <button type="submit" form="form_{{ language.code}}" class="uk-visible@s uk-button uk-button-text uk-margin-right" {% if language.code == LANGUAGE_CODE %}disabled{% endif %}>{{ language.code }}</button>
+              <button type="submit" form="form_{{ language.code}}" class="uk-visible@s uk-button uk-button-text uk-margin-right {% if language.code == LANGUAGE_CODE %}uk-active{% else %}uk-text-muted{% endif %}">{{ language.code }}</button>
               {% endfor %}
               <a class="uk-navbar-toggle uk-hidden@m" uk-toggle uk-navbar-toggle-icon href="#offcanvas-nav"></a>
             </div>

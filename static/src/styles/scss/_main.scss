@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
 $screen-lg-min: 992px;
 $hl-pink: #f3c1c1;
 $bg-pink: #f6f2f2;
 $dark-pink: #b37972;
-$heading-font: 'Bellota', sans-serif;
+
+$bellota: 'Bellota', sans-serif;
+$quicksand: 'Quicksand', sans-serif;
 
 @mixin lg {
   @media (min-width: #{$screen-lg-min}) {
@@ -34,7 +36,7 @@ a {
 }
 
 #brand {
-  font-family: $heading-font;
+  font-family: $bellota;
   @include highlight;
 
 }
@@ -106,6 +108,13 @@ a {
   margin-left: 50px;
 }
 
+#no-results {
+  @include lg {
+    margin-left: 10px;
+  }
+  margin-left: 1px;
+}
+
 .nav-links {
   margin-right: 5px;
 }
@@ -128,14 +137,14 @@ a {
 
 .heading {
   color: #7b7b7b;
-  font-family: $heading-font;
+  font-family: $bellota;
   font-weight: 600;
 }
 
 article.recipe {
   span {
     * {
-      font-family: 'Manrope', serif;
+      font-family: $quicksand;
       font-weight: 600;
       color: $dark-pink;
     }
@@ -170,7 +179,7 @@ img.rounded {
         padding: 10px;
 
         &.parent {
-          font-family: $heading-font;
+          font-family: $bellota;
           font-weight: 600;
           font-size: 17px;
           width: 90%;
@@ -184,11 +193,12 @@ img.rounded {
         a {
           &.child {
             padding: 5px;
-            font-weight: 600;
+            font-weight: 800;
+            font-family: $quicksand;
 
             &.active {
-              color: white;
-              background-color: $dark-pink;
+              color: #616161;
+              background-color: #d1c5c4;
             }
           }
         }

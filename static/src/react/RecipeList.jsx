@@ -101,7 +101,7 @@ class RecipeList extends React.Component {
       )
     }
     return (
-      <div className="uk-grid uk-flex-center uk-child-width-1-1@m uk-background-muted" uk-grid="true">
+      <div id="no-results" className="uk-grid uk-flex-center uk-child-width-1-1@m uk-background-muted" uk-grid="true">
         <div className="uk-container uk-padding-large uk-text-center uk-height-medium">
           <div>
             <h1 className="heading">No matching recipes found!</h1>
@@ -137,7 +137,7 @@ class RecipeList extends React.Component {
               offset={3}
               fetchRecipes={this.fetchRecipes}
             /> }
-            <div className="uk-flex uk-flex-center">
+            <div className="uk-flex uk-flex-center uk-hidden@m">
               <a href="#top" uk-totop="true" uk-scroll="true"/>
             </div>
           </div>

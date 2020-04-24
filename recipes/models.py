@@ -4,14 +4,16 @@ from django.conf import settings
 from django.dispatch import receiver
 from django.utils.text import slugify
 from django.db.models import signals
+from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(_('name'), max_length=100, unique=True)
 
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
     def __repr__(self):
         return f"{self.__class__.__name__}'({self.name})'"
@@ -21,15 +23,15 @@ class Category(models.Model):
 
 
 class Recipe(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    description = RichTextField()
+    name = models.CharField(_('name'), max_length=100, unique=True)
+    description = RichTextField(_('description'))
     picture = models.ImageField(
-        default='default.png', upload_to=settings.RECIPE_PIC_PATH
+        _('picture'), upload_to=settings.RECIPE_PIC_PATH
     )
-    created = models.DateTimeField(auto_now_add=True)
-    categories = models.ManyToManyField(Category)
-    slug = models.SlugField(editable=False)
-    url = models.URLField(blank=True)
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    categories = models.ManyToManyField(Category, verbose_name=_('Categories'))
+    slug = models.SlugField(_('slug'), editable=False)
+    url = models.URLField('URL', blank=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -64,6 +66,8 @@ class Recipe(models.Model):
         return self.name
 
     class Meta:
+        verbose_name = _('Recipe')
+        verbose_name_plural = _('Recipes')
         ordering = ['-created']
 
 
