@@ -134,6 +134,14 @@ img.rounded {
   }
 }
 
+#archive.sub-nav {
+  li {
+    font-family: $quicksand;
+    list-style: none;
+    font-weight: bold;
+  }
+}
+
 #categories {
   @include lg {
     margin-left: 0px;
@@ -184,7 +192,7 @@ img.rounded {
 }
 
 .sub-nav {
-    padding: 14px;
+  padding: 14px;
 
   ul {
     background-color: #f8f8f8;
@@ -198,7 +206,6 @@ img.rounded {
           font-family: $bellota;
           font-weight: 600;
           font-size: 17px;
-          width: 90%;
           border-bottom: .12rem dashed #564949;
         }
       }

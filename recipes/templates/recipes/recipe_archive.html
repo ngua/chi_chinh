@@ -1,0 +1,40 @@
+{% extends "recipes/base.html" %}
+{% load i18n chi_chinh_extras %}
+{% block title %}{{ archive }} • {{ block.super }}{% endblock %}
+{% block sub_crumb %}
+<li><span>{{ archive }}</span></li>
+{% endblock %}
+{% block content %}
+{% regroup latest by created|date:'Y' as year_list %}
+<section class="uk-section uk-section-default uk-section-small" uk-height-viewport="expand: true">
+  <div class="uk-container uk-container-medium uk-animation-fade">
+    <h1 class="heading uk-heading-line"><span>{{ archive }}</span></h1>
+    <div id="archive" class="sub-nav">
+      {% for year in year_list %}
+      <ul uk-accordion>
+        <li class="{% if forloop.counter == 1 %}uk-open{% endif %}">
+          <a class="uk-accordion-title parent">{{ year.grouper }}</a>
+          <div class="uk-accordion-content">
+            {% regroup year.list by created|date:'M' as month_list %}
+            {% for month in month_list %}
+            <ul uk-accordion>
+              <li class="{% if forloop.counter == 1 %}uk-open{% endif %}">
+                <a class="uk-accordion-title parent">{{ month.grouper }}</a>
+                <div class="uk-accordion-content">
+                  <ul class="uk-list uk-list-divider">
+                    {% for recipe in month.list %}
+                    {% accordion recipe %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+            </ul>
+            {% endfor %}
+          </div>
+        </li>
+      </ul>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "recipes/base.html" %}
+{% load chi_chinh_extras %}
+{% block title %}{{ month|date:'M, Y' }} • {{ archive }} • {{ block.super }}{% endblock %}
+{% block sub_crumb %}
+<li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
+<li><span>{{ month|date:'Y' }}</span></li>
+{% endblock %}
+{% block content %}
+<section class="uk-section uk-section-default uk-section-small" uk-height-viewport="expand: true">
+  <div class="uk-container uk-container-medium uk-animation-fade">
+    <h2 class="heading uk-heading-line"><span>{{ archive }} - {{ month|date:'M, Y' }}</span></h2>
+    {% if not object_list %}
+    <div class="uk-grid uk-flex-center uk-child-width-1-1@m uk-background-muted" uk-grid>
+      <div class="uk-container uk-padding-large uk-text-center uk-height-large">
+        <h1 class="heading">No recipes found!</h1>
+      </div>
+    </div>
+    {% else %}
+    <div class="uk-grid uk-child-width-1-1@m" uk-grid>
+      <div id="archive" class="sub-nav">
+        <ul class="uk-list">
+          {% for recipe in object_list %}
+          {% accordion recipe %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="uk-padding">
+      <hr>
+      <ul class="uk-pagination uk-flex-center" uk-margin>
+        {% if previous_month %}
+        <li>
+          <li><a href="{% url 'recipe-month-archive' previous_month|date:'Y' previous_month|date:'n' %}"><span uk-pagination-previous></span></a></li>
+        </li>
+        {% endif %}
+        <li class="uk-active"><span>{{ month|date:'M, Y' }}</span></li>
+        {% if next_month %}
+        <li>
+          <li><a href="{% url 'recipe-month-archive' next_month|date:'Y' next_month|date:'n' %}"><span uk-pagination-next></span></a></li>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

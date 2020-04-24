@@ -5,6 +5,8 @@
 {% trans 'About' as about %}
 {% trans 'Channel' as channel %}
 {% trans 'Subscribe' as subscribe %}
+{% trans 'Archive' as archive %}
+{% trans 'See more' as see_more %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,6 +35,7 @@
                 <a class="uk-button uk-button-text" type="button">More</a>
                 <div uk-dropdown>
                   <ul class="uk-nav uk-dropdown-nav">
+                    <li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
                     <li><a href="#">{{ contact }}</a></li>
                     <li><a href="#">{{ about }}</a></li>
                     <li class="uk-nav-divider"></li>
@@ -118,6 +121,7 @@
             <a href="{% url 'index' %}">{{ home }}</a>
             <ul class="uk-nav-sub">
               <li><a href="{% url 'recipes' %}">{{ recipes }}</a></li>
+              <li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
               <li><a href="#">{{ about }}</a></li>
               <li><a href="#">{{ contact }}</a></li>
             </ul>

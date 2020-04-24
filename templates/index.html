@@ -11,7 +11,7 @@
           <span>{% trans "CHỊ CHINH'S KITCHEN" %}</span>
           <h1 class="uk-margin-top uk-margin-small-bottom uk-margin-remove-adjacent">{% trans 'AUTHENTIC COOKING' %}</h1>
           <p>{% trans 'New recipes every week!' %}</p>
-          <a href="{% url 'recipes' %}" class="uk-button uk-button-default uk-margin-top">{% trans 'See more' %}</a>
+          <a href="{% url 'recipes' %}" class="uk-button uk-button-default uk-margin-top">{{ see_more }}</a>
           <a href="" class="uk-button uk-button-default uk-margin-top">{% trans 'Subscribe' %}</a>
         </div>
       </div>
@@ -61,16 +61,16 @@
         {% endfor %}
         <hr>
         <div>
-          <a class="uk-button uk-button-text uk-text-muted" href="{% url 'recipes' %}">{% trans 'See more' %} >></a>
+          <a class="uk-button uk-button-text uk-text-muted" href="{% url 'recipes' %}">{{ see_more }} >></a>
         </div>
       </div>
       <div class="uk-width-1-3@m">
         <div>
-          <h4 class="heading uk-heading-line uk-text-bold"><span>{% trans 'Archive' %}</span></h4>
-          {% for date in archive %}
+          <h4 class="heading uk-heading-line uk-text-bold"><span>{{ archive }}</span></h4>
+          {% for date in recipe_archive %}
           <ul>
             <li>
-              <a href="#">{{ date|date:'F' }}
+              <a href="{% url 'recipe-month-archive' date|date:'Y' date|date:'n' %}">{{ date|date:'F' }}
                 <small>{{ date|date:'Y'}}</small>
               </a>
             </li>

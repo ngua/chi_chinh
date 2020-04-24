@@ -3,10 +3,20 @@ from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
 from django.urls import reverse
-from django.utils.text import slugify
+from django.utils import timezone
 from django.db.models import signals
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
+
+
+class RecipeManager(models.Manager):
+    def archive(self):
+        return [
+            date for date in self.dates(
+                'created', 'month', order='DESC'
+            )
+        ]
 
 
 class Category(models.Model):
@@ -29,10 +39,12 @@ class Recipe(models.Model):
     picture = models.ImageField(
         _('picture'), upload_to=settings.RECIPE_PIC_PATH
     )
-    created = models.DateTimeField(_('created'), auto_now_add=True)
+    created = models.DateTimeField(_('created'), default=timezone.now)
     categories = models.ManyToManyField(Category, verbose_name=_('Categories'))
     slug = models.SlugField(_('slug'), editable=False)
     url = models.URLField('URL', blank=True)
+
+    objects = RecipeManager()
 
     def get_absolute_url(self):
         return reverse(

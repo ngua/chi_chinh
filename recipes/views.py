@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
+from django.views.generic.dates import ArchiveIndexView, MonthArchiveView
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Recipe
@@ -10,8 +11,8 @@ from .pagination import PageNumberPaginator
 
 def index(request):
     latest = Recipe.objects.order_by('-created')[:2]
-    archive = set(Recipe.objects.dates('created', 'year'))
-    context = {'latest': latest, 'archive': archive}
+    recipe_archive = Recipe.objects.archive()
+    context = {'latest': latest, 'recipe_archive': recipe_archive}
     return render(request, 'index.html', context=context)
 
 
@@ -40,6 +41,18 @@ class RecipeDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(self.object.get_random_related())
         context['related'] = self.object.get_random_related()
         return context
+
+
+class RecipeArchiveView(ArchiveIndexView):
+    queryset = Recipe.objects.order_by('created')
+    date_field = 'created'
+    allow_empty = True
+
+
+class RecipeMonthArchiveView(MonthArchiveView):
+    queryset = Recipe.objects.order_by('created')
+    date_field = 'created'
+    allow_empty = True
+    allow_future = True

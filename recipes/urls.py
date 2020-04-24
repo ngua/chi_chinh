@@ -10,5 +10,15 @@ urlpatterns = [
         'recipes/<int:year>/<int:month>/<slug:slug>/',
         views.RecipeDetailView.as_view(),
         name='recipe-detail'
+    ),
+    path(
+        'recipes/archive/',
+        views.RecipeArchiveView.as_view(),
+        name='recipe-archive'
+    ),
+    path(
+        'recipes/archive/<int:year>/<int:month>/',
+        views.RecipeMonthArchiveView.as_view(month_format='%m'),
+        name='recipe-month-archive'
     )
 ]

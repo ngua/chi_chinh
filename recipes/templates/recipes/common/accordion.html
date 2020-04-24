@@ -1,0 +1,31 @@
+<li>
+  <div class="uk-grid uk-grid-divider" uk-grid>
+    <div class="uk-width-auto@m">
+      <div class="uk-inline">
+        <img data-src="{{ recipe.picture.url }}" height="200" width="200" alt="" uk-img>
+        <div class="uk-overlay uk-overlay-primary uk-position-cover">
+          <div class="uk-position-center">
+            <a class="uk-button uk-button-text" href="{{ recipe.get_absolute_url }}">
+              {{ recipe.name }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-width-expand@m">
+      <div class="uk-margin">
+        {% for category in recipe.categories.all|slice:":6" %}
+        <div class="uk-label">
+          {{ category }}
+        </div>
+        {% endfor %}
+      </div>
+      <small class="uk-text-muted">{{ recipe.created|date:'Y/m/d' }}</small>
+      {{ recipe.description|truncatewords:10|safe }}
+    </div>
+    <div class="uk-width-auto@m uk-flex uk-flex-middle uk-margin-remove">
+      <a class="uk-button uk-button-text" href="{{ recipe.get_absolute_url }}"><span uk-icon="chevron-double-right"></span></a>
+      <a class="" href="#" uk-icon="youtube"></a>
+    </div>
+  </div>
+</li>

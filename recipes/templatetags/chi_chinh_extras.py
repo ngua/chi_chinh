@@ -18,3 +18,8 @@ def get_setting(name):
     if name not in settings.SETTINGS_EXPORT:
         raise AttributeError(f'{name} is not in allowed settings exports')
     return getattr(settings, name, '')
+
+
+@register.inclusion_tag('recipes/common/accordion.html')
+def accordion(recipe):
+    return {'recipe': recipe}

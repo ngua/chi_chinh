@@ -10,6 +10,7 @@ class Categories extends React.Component {
   }
 
   render() {
+    const langCode = JSON.parse(document.querySelector('#lang').textContent)
     const selected = this.props.selected;
     const categories = this.props.categories;
     return (
@@ -35,6 +36,7 @@ class Categories extends React.Component {
         <li>
           <a onClick={(e) => this.clearFilters()} className="parent">Clear All</a>
         </li>
+        <li><a className="parent" href={`${window.origin}/${langCode}/recipes/archive/`}>Archive</a></li>
       </ul>
     )
   }
