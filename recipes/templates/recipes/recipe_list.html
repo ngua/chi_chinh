@@ -1,10 +1,18 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load render_bundle from webpack_loader %}
-{% block title %}Recipes{% endblock %}
+{% trans 'Recipes' as recipes %}
+{% block title %}{{ recipes }}{% endblock %}
+{% block breadcrumb %}
+<ul class="uk-breadcrumb">
+  <li><a href="{% url 'index' %}">{% trans 'Home' context 'Homepage' %}</a></li>
+  <li><span>{% trans 'Recipes' %}</span></li>
+</ul>
+{% endblock %}
 {% block content %}
 <section id="top" class="uk-section uk-section-default uk-padding-small" uk-height-viewport="expand: true">
   <div class="uk-container  uk-margin uk-container-large">
-    <h1 class="heading uk-heading-line"><span>Recipes</span></h1>
+    <h1 class="heading uk-heading-line"><span>{{ recipes }}</span></h1>
   </div>
   <div id="recipes">
     {% render_bundle 'recipes' %}

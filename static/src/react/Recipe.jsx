@@ -15,7 +15,7 @@ class Recipe extends React.Component {
     )
   }
 
-  renderBody(name, slug) {
+  renderBody(name, slug, url) {
     return (
       <div className="uk-grid uk-grid-small" uk-grid="true">
         <div className="uk-width-expand">
@@ -24,25 +24,25 @@ class Recipe extends React.Component {
           </h3>
         </div>
         <div className="uk-width-auto uk-text-right uk-text-muted">
-          <a href={window.location + slug} className="uk-margin-right" ratio="1.2" uk-icon="chevron-double-right"/>
-          <a href="#" className="uk-margin-right" ratio="1.2" uk-icon="youtube"/>
+          <a href={window.location + slug} target="_blank" className="uk-margin-right" ratio="1.2" uk-icon="chevron-double-right"/>
+          <a href={url} target="_blank" className="uk-margin-right" ratio="1.2" uk-icon="youtube"/>
         </div>
       </div>
     )
   }
 
   render() {
-    const recipe = this.props.recipe;
-    const datePosted = new Date(recipe.created);
+    const { name, slug, created, picture, categories, url } = this.props.recipe;
+    const dateCreated = new Date(created);
     return (
       <div className="uk-animation-fade">
         <div className="uk-card uk-card-medium uk-card-hover">
-          { this.renderHeader(recipe.picture) }
+          { this.renderHeader(picture) }
           <div className="uk-card-body uk-padding-remove-top">
-            { this.renderBody(recipe.name, recipe.slug) }
-            <p className="uk-text-meta">Posted on { datePosted.toLocaleDateString() }</p>
+            { this.renderBody(name, slug, url) }
+            <p className="uk-text-meta">Posted on { dateCreated.toLocaleDateString() }</p>
             <hr />
-            {recipe.categories.map((category, i) => {
+            {categories.map((category, i) => {
               return (
                 <div key={i} className="uk-label uk-margin-small-right">
                   {category}

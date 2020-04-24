@@ -5,6 +5,7 @@ $screen-lg-min: 992px;
 $hl-pink: #f3c1c1;
 $bg-pink: #f6f2f2;
 $dark-pink: #b37972;
+$grey: #8c8c8c;
 
 $bellota: 'Bellota', sans-serif;
 $quicksand: 'Quicksand', sans-serif;
@@ -24,7 +25,21 @@ $quicksand: 'Quicksand', sans-serif;
 a {
   @include highlight;
   color: #b37972;
+}
 
+article.recipe {
+  h3 {
+    font-family: $quicksand;
+    font-weight: 600;
+    color: $dark-pink;
+  }
+}
+
+img.rounded {
+  height: 100px;
+  width: auto;
+  border: 1px solid black;
+  border-radius: 50%;
 }
 
 #header {
@@ -71,15 +86,32 @@ a {
     background-color: $bg-pink;
 
     a, h3, span, button {
-      color: #8c8c8c;
+      color: $grey;
+    }
+
+    hr {
+      background-color: $grey;
+    }
+
+    li.uk-parent {
+      font-family: $quicksand;
     }
   }
 }
 
 #overlay {
+  h1 {
+    font-family: $quicksand;
+  }
+
   span {
     letter-spacing: .2em;
     font-size: .8em;
+    font-family: $quicksand;
+  }
+
+  p {
+    font-family: $bellota;
   }
 }
 
@@ -115,10 +147,6 @@ a {
   margin-left: 1px;
 }
 
-.nav-links {
-  margin-right: 5px;
-}
-
 .uk-button-text {
   &:before {
     border-bottom: 1px solid $hl-pink;
@@ -135,31 +163,18 @@ a {
   border-radius: 10px;
 }
 
-.heading {
-  color: #7b7b7b;
-  font-family: $bellota;
-  font-weight: 600;
-}
-
-article.recipe {
-  span {
-    * {
-      font-family: $quicksand;
-      font-weight: 600;
-      color: $dark-pink;
-    }
-  }
-}
-
 .uk-label {
   background-color: $dark-pink;
 }
 
-img.rounded {
-  height: 100px;
-  width: auto;
-  border: 1px solid black;
-  border-radius: 50%;
+.nav-links {
+  margin-right: 5px;
+}
+
+.heading {
+  color: #7b7b7b;
+  font-family: $bellota;
+  font-weight: 600;
 }
 
 .related {
