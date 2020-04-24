@@ -1,4 +1,10 @@
 {% load static i18n chi_chinh_extras %}
+{% trans 'Home' as home context 'Home page' %}
+{% trans 'Recipes' as recipes %}
+{% trans 'Contact' as contact %}
+{% trans 'About' as about %}
+{% trans 'Channel' as channel %}
+{% trans 'Subscribe' as subscribe %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,21 +24,20 @@
           <div class="uk-navbar-left nav-overlay uk-visible@m">
             <ul class="uk-navbar-nav">
               <li>
-                <a class="uk-button-text" href="{% url 'index' %}" title="Subscribe">Home</a>
+                <a class="uk-button-text" href="{% url 'index' %}" title="Subscribe">{{ home }}</a>
               </li>
               <li>
-                <a class="uk-button-text" href="{% url 'recipes' %}" title="Sign Up">Recipes</a>
+                <a class="uk-button-text" href="{% url 'recipes' %}" title="Sign Up">{{ recipes }}</a>
               </li>
               <li>
                 <a class="uk-button uk-button-text" type="button">More</a>
                 <div uk-dropdown>
                   <ul class="uk-nav uk-dropdown-nav">
-                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">{{ contact }}</a></li>
+                    <li><a href="#">{{ about }}</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Channel</a></li>
-                    <li><a href="#">Subscribe</a></li>
+                    <li><a href="#">{{ channel }}</a></li>
+                    <li><a href="#">{{ subscribe }}</a></li>
                   </ul>
                 </div>
               </li>
@@ -70,17 +75,21 @@
         </nav>
       </div>
     </header>
-    <div class="uk-container">
+    <div class="uk-container uk-visible@m">
       <nav id="sub-nav">
-        <ul class="uk-subnav uk-flex uk-flex-between@m uk-visible@m">
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'index' %}">Home</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'recipes' %}">Recipes</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">Contact</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">About</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">Channel</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">Subscribe</a></li>
+        <ul class="uk-subnav uk-flex uk-flex-between@m">
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'index' %}">{{ home }}</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'recipes' %}">{{ recipes }}</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ contact }}</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ about }}</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ channel }}</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ subscribe }}</a></li>
         </ul>
       </nav>
+    </div>
+    <div class="uk-container uk-flex uk-flex-center uk-padding-small uk-padding-remove-bottom">
+    {% block breadcrumb %}
+    {% endblock %}
     </div>
     {% block content %}{% endblock %}
     <footer class="uk-section uk-section-small uk-section-muted">
@@ -104,18 +113,28 @@
     <div id="offcanvas-nav" uk-offcanvas>
       <div class="uk-background-muted uk-dark uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
         <button class="uk-offcanvas-close uk-close" type="button" uk-close></button>
-        <ul class="uk-nav uk-dark">
-          <li><a href="{% url 'index' %}">Home</a></li>
-          <li class="uk-nav-divider"></li>
-          <li><a href="{% url 'recipes' %}">Recipes</a></li>
-          <li class="uk-nav-divider"></li>
-          <li><a href="#">About</a></li>
-          <li class="uk-nav-divider"></li>
+        <ul class="uk-nav">
+          <li class="uk-parent">
+            <a href="{% url 'index' %}">{{ home }}</a>
+            <ul class="uk-nav-sub">
+              <li><a href="{% url 'recipes' %}">{{ recipes }}</a></li>
+              <li><a href="#">{{ about }}</a></li>
+              <li><a href="#">{{ contact }}</a></li>
+            </ul>
+            <hr>
+          </li>
+          <li class="uk-parent">
+            <a href="">{{ channel }}</a>
+            <ul class="uk-nav-sub">
+              <li><a href="{% url 'recipes' %}">{{ subscribe }}</a></li>
+            </ul>
+            <hr>
+          </li>
         </ul>
         <h3>Chị Chinh</h3>
         <div class="uk-inline">
-          <a class="" href="#" uk-icon="youtube"></a>
-          <a class="" href="#" uk-icon="facebook"></a>
+          <a class="" href="" uk-icon="youtube"></a>
+          <a class="" href="" uk-icon="facebook"></a>
         </div>
       </div>
     </div>

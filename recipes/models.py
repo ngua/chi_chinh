@@ -2,6 +2,7 @@ import os
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
+from django.urls import reverse
 from django.utils.text import slugify
 from django.db.models import signals
 from django.utils.translation import gettext_lazy as _
@@ -32,6 +33,16 @@ class Recipe(models.Model):
     categories = models.ManyToManyField(Category, verbose_name=_('Categories'))
     slug = models.SlugField(_('slug'), editable=False)
     url = models.URLField('URL', blank=True)
+
+    def get_absolute_url(self):
+        return reverse(
+            'recipe-detail',
+            kwargs={
+                'year': self.created.strftime('%Y'),
+                'month': self.created.strftime('%m'),
+                'slug': self.slug
+            }
+        )
 
     def save(self, *args, **kwargs):
         if not self.id:

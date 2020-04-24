@@ -10,6 +10,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class RecipeSerializer(serializers.ModelSerializer):
     categories = serializers.ListSerializer(child=serializers.CharField())
+    absurl = serializers.URLField(source='get_absolute_url', read_only=True)
 
     class Meta:
         model = Recipe

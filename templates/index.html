@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %}Home{% endblock %}
+{% load static i18n %}
+{% block title %}{% trans 'Home' %}{% endblock %}
 {% block content %}
 <section class="uk-section uk-section-small">
   <div class="uk-container">
@@ -8,11 +8,11 @@
       <img src="{% static 'img/hero.jpg' %}" alt="" uk-cover>
       <div id="overlay" class="uk-overlay uk-overlay-primary uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-light uk-text-center">
         <div data-uk-scrollspy="cls: uk-animation-slide-bottom-small">
-          <span>CHỊ CHINH'S KITCHEN</span>
-          <h1 class="uk-margin-top uk-margin-small-bottom uk-margin-remove-adjacent">AUTHENTIC COOKING</h1>
-          <p>New recipes every week!</p>
-          <a href="{% url 'recipes' %}" class="uk-button uk-button-default uk-margin-top">See More</a>
-          <a href="#" class="uk-button uk-button-default uk-margin-top">Subscribe</a>
+          <span>{% trans "CHỊ CHINH'S KITCHEN" %}</span>
+          <h1 class="uk-margin-top uk-margin-small-bottom uk-margin-remove-adjacent">{% trans 'AUTHENTIC COOKING' %}</h1>
+          <p>{% trans 'New recipes every week!' %}</p>
+          <a href="{% url 'recipes' %}" class="uk-button uk-button-default uk-margin-top">{% trans 'See more' %}</a>
+          <a href="" class="uk-button uk-button-default uk-margin-top">{% trans 'Subscribe' %}</a>
         </div>
       </div>
     </div>
@@ -22,15 +22,15 @@
   <div class="uk-container">
     <div class="uk-grid uk-flex uk-flex-center" ukgrid>
       <div class="uk-width-2-3@m">
-        <h2 class="heading uk-heading-line uk-text-bold"><span>Latest Recipes</span></h2>
+        <h2 class="heading uk-heading-line uk-text-bold"><span>{% trans 'Latest Recipes' %}</span></h2>
         {% for recipe in latest %}
-        <div class="uk-grid" uk-grid>
+        <div class="uk-grid uk-grid-divider" uk-grid>
           <div class="uk-width-1-2@m">
             <img class="uk-animation-fade" height=400 width=400 src="{{ recipe.picture.url }}" alt="">
           </div>
           <div class="uk-width-1-2@m">
             <article class="uk-section-small uk-section-default recipe">
-              <span><h3 class="">{{ recipe.name }}</h3></span>
+              <h3 class="">{{ recipe.name }}</h3>
               <div>
                 {% for category in recipe.categories.all|slice:":6" %}
                 <div class="uk-label">
@@ -38,11 +38,18 @@
                 </div>
                 {% endfor %}
               </div>
-              <p class="uk-article-meta">Posted on {{ recipe.created|date:'F d, Y'}}</p>
+              <p class="uk-article-meta">{% trans 'Posted on ' %}
+              {% get_current_language as LANGUAGE_CODE %}
+              {% if LANGUAGE_CODE == 'vi' %}
+              {{ recipe.created|date:'d F, Y'}}
+              {% else %}
+              {{ recipe.created|date:'F dS, Y'}}
+              {% endif %}
+              </p>
               <p>{{ recipe.description|truncatewords:5|safe }}</p>
-              <div class="uk-grid-small uk-child-width-auto" uk-grid>
+              <div class="uk-grid-small uk-child-width-auto uk-article-meta" uk-grid>
                 <div>
-                  <a class="uk-button uk-button-text" href="{% url 'recipes' %}">>></a>
+                  <a class="uk-button uk-button-text" href="{{ recipe.get_absolute_url }}"><span uk-icon="chevron-double-right"/></a>
                 </div>
                 <div>
                   <a class="" href="#" uk-icon="youtube"></a>
@@ -54,12 +61,12 @@
         {% endfor %}
         <hr>
         <div>
-          <a class="uk-button uk-button-text uk-text-muted" href="{% url 'recipes' %}">See more >></a>
+          <a class="uk-button uk-button-text uk-text-muted" href="{% url 'recipes' %}">{% trans 'See more' %} >></a>
         </div>
       </div>
       <div class="uk-width-1-3@m">
         <div>
-          <h4 class="heading uk-heading-line uk-text-bold"><span>Archive</span></h4>
+          <h4 class="heading uk-heading-line uk-text-bold"><span>{% trans 'Archive' %}</span></h4>
           {% for date in archive %}
           <ul>
             <li>
@@ -71,9 +78,9 @@
           {% endfor %}
         </div>
         <div>
-          <h4 class="heading uk-heading-line uk-text-bold"><span>About Me</span></h4>
+          <h4 class="heading uk-heading-line uk-text-bold"><span>{% trans 'About Me' %}</span></h4>
           <section class="uk-section uk-section-muted uk-padding-small">
-            <div class="uk-grid-small uk-flex uk-flex-middle" uk-grid>
+            <div class="uk-Hrid-small uk-flex uk-flex-middle" uk-grid>
               <div class="uk-width-auto">
                 <img class="rounded" src="{% static 'img/about.jpg' %}" alt="">
               </div>

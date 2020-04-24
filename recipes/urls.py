@@ -7,7 +7,7 @@ urlpatterns = [
     path('recipes/', views.recipes, name='recipes'),
     path('api/recipes/', views.RecipeListAPIView.as_view()),
     path(
-        'recipes/<slug:slug>/',
+        'recipes/<int:year>/<int:month>/<slug:slug>/',
         views.RecipeDetailView.as_view(),
         name='recipe-detail'
     )
