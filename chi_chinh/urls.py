@@ -15,20 +15,26 @@ Including another URLconf
 """
 import os
 from django.contrib import admin
+from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
-from django.conf import settings
+from django.views.i18n import JavaScriptCatalog
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('recipes.urls')),
-    path('i18n/', include('django.conf.urls.i18n'))
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 urlpatterns += i18n_patterns(
     path('', include('recipes.urls')),
+    path(
+        'jsi18n/',
+        JavaScriptCatalog.as_view(packages=['recipes']),
+        name='js-catalog'
+    ),
 )
 
 if os.environ.get('DJANGO_SETTINGS_MODULE') == 'settings.dev':

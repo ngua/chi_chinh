@@ -11,8 +11,7 @@ from .pagination import PageNumberPaginator
 
 def index(request):
     latest = Recipe.objects.order_by('-created')[:2]
-    recipe_archive = Recipe.objects.archive()
-    context = {'latest': latest, 'recipe_archive': recipe_archive}
+    context = {'latest': latest}
     return render(request, 'index.html', context=context)
 
 

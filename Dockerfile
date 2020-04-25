@@ -4,7 +4,7 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apk add build-base musl-dev gcc postgresql-dev python3-dev zlib-dev jpeg-dev openssl-dev libffi-dev \
+RUN apk add build-base musl-dev gcc postgresql-dev python3-dev zlib-dev jpeg-dev openssl-dev libffi-dev gettext-dev \
         && pip install --upgrade pip
 
 
@@ -18,6 +18,7 @@ COPY ./entrypoint.sh /app/entrypoint.sh
 ENV UNAME=app
 ENV UID=1000
 RUN addgroup -S $UNAME && adduser --disabled-password --gecos '' -S $UNAME -g $UNAME --uid $UID
+RUN chown $UNAME:$UNAME /app
 USER $user
 
 ENTRYPOINT ["/app/entrypoint.sh"]

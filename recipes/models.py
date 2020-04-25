@@ -39,7 +39,7 @@ class Recipe(models.Model):
     picture = models.ImageField(
         _('picture'), upload_to=settings.RECIPE_PIC_PATH
     )
-    created = models.DateTimeField(_('created'), default=timezone.now)
+    created = models.DateField(_('created'), default=timezone.now)
     categories = models.ManyToManyField(Category, verbose_name=_('Categories'))
     slug = models.SlugField(_('slug'), editable=False)
     url = models.URLField('URL', blank=True)

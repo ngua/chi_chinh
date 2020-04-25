@@ -1,6 +1,7 @@
 import React from 'react';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
+import { gettext } from 'django';
 
 UIkit.use(Icons);
 
@@ -34,13 +35,14 @@ class Recipe extends React.Component {
   render() {
     const { name, created, picture, categories, url, absurl } = this.props.recipe;
     const dateCreated = new Date(created);
+    const postedMsg = gettext('Posted on');
     return (
       <div className="uk-animation-fade">
         <div className="uk-card uk-card-medium uk-card-hover">
           { this.renderHeader(picture) }
           <div className="uk-card-body uk-padding-remove-top">
             { this.renderBody(name, url, absurl) }
-            <p className="uk-text-meta">Posted on { dateCreated.toLocaleDateString() }</p>
+            <p className="uk-text-meta">{ postedMsg } { dateCreated.toLocaleDateString() }</p>
             <hr />
             {categories.map((category, i) => {
               return (

@@ -1,0 +1,13 @@
+{% load i18n %}
+<div>
+  <h4 class="heading uk-heading-line uk-text-bold"><span>{% trans 'Archive' %}</span></h4>
+  {% for date in recipe_archive %}
+  <ul>
+    <li>
+      <a href="{% url 'recipe-month-archive' date|date:'Y' date|date:'n' %}">{{ date|date:'F' }}
+        <small>{{ date|date:'Y'}}</small>
+      </a>
+    </li>
+  </ul>
+  {% endfor %}
+</div>

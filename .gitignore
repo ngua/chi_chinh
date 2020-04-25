@@ -11,3 +11,4 @@ static/src/package-lock.json
 static/src/.stylelintrc.json
 static/src/webpack-stats.json
 */migrations
+web.dev.sh

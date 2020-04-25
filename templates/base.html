@@ -32,7 +32,7 @@
                 <a class="uk-button-text" href="{% url 'recipes' %}" title="Sign Up">{{ recipes }}</a>
               </li>
               <li>
-                <a class="uk-button uk-button-text" type="button">More</a>
+                <a class="uk-button uk-button-text" type="button">{% trans 'More' %}</a>
                 <div uk-dropdown>
                   <ul class="uk-nav uk-dropdown-nav">
                     <li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>

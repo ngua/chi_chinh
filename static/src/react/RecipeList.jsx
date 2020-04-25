@@ -6,6 +6,7 @@ import Loader from 'react-loader-spinner';
 import Categories from './Categories';
 import Recipe from './Recipe';
 import Pagination from './Pagination';
+import { gettext as _ } from 'django';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 UIkit.use(Icons);
@@ -69,7 +70,7 @@ class RecipeList extends React.Component {
         selected: selected
       })
     }, () => {
-      const selection = this.state.selected.join(',');
+      const selection = this.joinSelected();
       this.fetchRecipes({params: {categories: selection}});
     });
   }
@@ -80,6 +81,10 @@ class RecipeList extends React.Component {
     }, () => {
       this.fetchRecipes();
     })
+  }
+
+  joinSelected() {
+    return this.state.selected.join(',');
   }
 
   componentDidMount() {
@@ -104,8 +109,8 @@ class RecipeList extends React.Component {
       <div id="no-results" className="uk-grid uk-flex-center uk-child-width-1-1@m uk-background-muted" uk-grid="true">
         <div className="uk-container uk-padding-large uk-text-center uk-height-medium">
           <div>
-            <h1 className="heading">No matching recipes found!</h1>
-            <p>Try choosing another combination</p>
+            <h1 className="heading">{ _('No matching recipes found!') }</h1>
+            <p>{ _('Try choosing another combination') }</p>
           </div>
         </div>
       </div>

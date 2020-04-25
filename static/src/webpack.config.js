@@ -41,5 +41,9 @@ module.exports = {
 
   resolve: {
     extensions: ['*', '.js', '.jsx']
-  }
+  },
+
+  externals: {
+    django: 'django'
+  },
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { gettext as _ } from 'django';
 
 class Categories extends React.Component {
   filterCategories = (category) => {
@@ -15,7 +16,7 @@ class Categories extends React.Component {
     const categories = this.props.categories;
     return (
       <ul className="uk-nav uk-nav-default uk-nav-parent-icon" uk-nav="true">
-        <li className="uk-parent"><a className="parent">Filter by Category</a>
+        <li className="uk-parent"><a className="parent"> { _('Filter by Category') } </a>
           <ul className="uk-nav-sub">
             { categories.map((category, i) => {
               const current = selected.includes(category);
@@ -34,9 +35,9 @@ class Categories extends React.Component {
           </ul>
         </li>
         <li>
-          <a onClick={(e) => this.clearFilters()} className="parent">Clear All</a>
+          <a onClick={(e) => this.clearFilters()} className="parent">{ _('Clear All') }</a>
         </li>
-        <li><a className="parent" href={`${window.origin}/${langCode}/recipes/archive/`}>Archive</a></li>
+        <li><a className="parent" href={`${window.origin}/${langCode}/recipes/archive/`}>{ _('Archive') }</a></li>
       </ul>
     )
   }

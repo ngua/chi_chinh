@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-25 10:57+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: static/src/react/Categories.jsx:19
+msgid "Filter by Category"
+msgstr "Lọc Theo Mục"
+
+#: static/src/react/Categories.jsx:38
+msgid "Clear All"
+msgstr "Xóa Bộ Lọc "
+
+#: static/src/react/Categories.jsx:40
+msgid "Archive"
+msgstr "Lưu Trữ"
+
+#: static/src/react/Recipe.jsx:38
+msgid "Posted on"
+msgstr "Đăng vào"
+
+#: static/src/react/RecipeList.jsx:112
+msgid "No matching recipes found!"
+msgstr "Không tìm thấy kết quả"
+
+#: static/src/react/RecipeList.jsx:113
+msgid "Try choosing another combination"
+msgstr "Hãy thử chọn mục khác"

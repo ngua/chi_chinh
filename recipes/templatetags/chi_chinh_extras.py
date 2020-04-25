@@ -1,5 +1,6 @@
 from django import template
 from django.conf import settings
+from recipes.models import Recipe
 
 
 register = template.Library()
@@ -23,3 +24,9 @@ def get_setting(name):
 @register.inclusion_tag('recipes/common/accordion.html')
 def accordion(recipe):
     return {'recipe': recipe}
+
+
+@register.inclusion_tag('recipes/common/archive.html')
+def recipe_archive():
+    recipe_archive = Recipe.objects.archive()
+    return {'recipe_archive': recipe_archive}
