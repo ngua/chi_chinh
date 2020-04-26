@@ -1,0 +1,12 @@
+@import 'variables';
+
+.field {
+  label {
+    @include quicksand;
+    font-weight: bold;
+  }
+
+  textarea {
+    resize: none;
+  }
+}

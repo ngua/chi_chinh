@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 10:57+0000\n"
+"POT-Creation-Date: 2020-04-26 11:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,26 +18,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: static/src/react/Categories.jsx:19
+#: static/src/react/contact/ContactForm.jsx:49
+msgid "This field is required"
+msgstr "Trường này cần thiết"
+
+#: static/src/react/contact/ContactForm.jsx:55
+msgid "255 Characters or less"
+msgstr "Tối đa 255 chữ"
+
+#: static/src/react/contact/ContactForm.jsx:56
+msgid "Please enter a valid email address"
+msgstr "Hãy nhập vào địa chỉ email hợp lệ"
+
+#: static/src/react/contact/ContactForm.jsx:70
+msgid "Name"
+msgstr "Tên"
+
+#: static/src/react/contact/ContactForm.jsx:76
+msgid "Email"
+msgstr "Địa chỉ email"
+
+#: static/src/react/contact/ContactForm.jsx:82
+msgid "Message"
+msgstr "Nội dung"
+
+#: static/src/react/contact/ContactForm.jsx:86
+msgid "Submit"
+msgstr "Gửi liên hệ"
+
+#: static/src/react/recipes/Categories.jsx:19
 msgid "Filter by Category"
 msgstr "Lọc Theo Mục"
 
-#: static/src/react/Categories.jsx:38
+#: static/src/react/recipes/Categories.jsx:38
 msgid "Clear All"
 msgstr "Xóa Bộ Lọc "
 
-#: static/src/react/Categories.jsx:40
+#: static/src/react/recipes/Categories.jsx:40
 msgid "Archive"
 msgstr "Lưu Trữ"
 
-#: static/src/react/Recipe.jsx:38
+#: static/src/react/recipes/Recipe.jsx:38
 msgid "Posted on"
 msgstr "Đăng vào"
 
-#: static/src/react/RecipeList.jsx:112
+#: static/src/react/recipes/RecipeList.jsx:112
 msgid "No matching recipes found!"
 msgstr "Không tìm thấy kết quả"
 
-#: static/src/react/RecipeList.jsx:113
+#: static/src/react/recipes/RecipeList.jsx:113
 msgid "Try choosing another combination"
 msgstr "Hãy thử chọn mục khác"

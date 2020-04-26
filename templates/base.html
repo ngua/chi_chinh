@@ -17,6 +17,7 @@
     <meta name="description" content="The home of Chị Chinh's cooking and recipe blog.">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/css/app.css' %}" />
+    {% block head %}{% endblock %}
     <title>{% block title %} {% endblock %} • Chị Chinh </title>
   </head>
   <body>
@@ -36,7 +37,7 @@
                 <div uk-dropdown>
                   <ul class="uk-nav uk-dropdown-nav">
                     <li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
-                    <li><a href="#">{{ contact }}</a></li>
+                    <li><a href="{% url 'contact' %}">{{ contact }}</a></li>
                     <li><a href="#">{{ about }}</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="#">{{ channel }}</a></li>
@@ -83,7 +84,7 @@
         <ul class="uk-subnav uk-flex uk-flex-between@m">
           <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'index' %}">{{ home }}</a></li>
           <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'recipes' %}">{{ recipes }}</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ contact }}</a></li>
+          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'contact' %}">{{ contact }}</a></li>
           <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ about }}</a></li>
           <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ channel }}</a></li>
           <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ subscribe }}</a></li>
@@ -91,8 +92,10 @@
       </nav>
     </div>
     <div class="uk-container uk-flex uk-flex-center uk-padding-small uk-padding-remove-bottom">
-    {% block breadcrumb %}
-    {% endblock %}
+      <ul class="uk-breadcrumb">
+        {% block breadcrumb %}
+        {% endblock %}
+      </ul>
     </div>
     {% block content %}{% endblock %}
     <footer class="uk-section uk-section-small uk-section-muted">
@@ -123,7 +126,7 @@
               <li><a href="{% url 'recipes' %}">{{ recipes }}</a></li>
               <li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
               <li><a href="#">{{ about }}</a></li>
-              <li><a href="#">{{ contact }}</a></li>
+              <li><a href="{% url 'contact' %}">{{ contact }}</a></li>
             </ul>
             <hr>
           </li>

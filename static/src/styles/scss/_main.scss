@@ -1,27 +1,6 @@
+@import 'variables';
 @import url('https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-
-$screen-lg-min: 992px;
-
-$hl-pink: #f3c1c1;
-$bg-pink: #f6f2f2;
-$dark-pink: #b37972;
-$grey: #8c8c8c;
-
-$bellota: 'Bellota', sans-serif;
-$quicksand: 'Quicksand', sans-serif;
-
-@mixin lg {
-  @media (min-width: #{$screen-lg-min}) {
-    @content;
-  }
-}
-
-@mixin highlight {
-  &:hover {
-    color: $hl-pink;
-  }
-}
 
 a {
   @include highlight;
@@ -30,7 +9,7 @@ a {
 
 article.recipe {
   h3 {
-    font-family: $quicksand;
+    @include quicksand;
     font-weight: 600;
     color: $dark-pink;
   }
@@ -95,20 +74,20 @@ img.rounded {
     }
 
     li.uk-parent {
-      font-family: $quicksand;
+      @include quicksand;
     }
   }
 }
 
 #overlay {
   h1 {
-    font-family: $quicksand;
+    @include quicksand;
   }
 
   span {
+    @include quicksand;
     letter-spacing: .2em;
     font-size: .8em;
-    font-family: $quicksand;
   }
 
   p {
@@ -132,28 +111,6 @@ img.rounded {
     letter-spacing: .2em;
     font-size: .8em;
   }
-}
-
-#archive.sub-nav {
-  li {
-    font-family: $quicksand;
-    list-style: none;
-    font-weight: bold;
-  }
-}
-
-#categories {
-  @include lg {
-    margin-left: 0px;
-  }
-  margin-left: 50px;
-}
-
-#no-results {
-  @include lg {
-    margin-left: 10px;
-  }
-  margin-left: 1px;
 }
 
 .uk-button-text {
@@ -189,49 +146,4 @@ img.rounded {
 .related {
   color: $dark-pink;
   font-weight: 700;
-}
-
-.sub-nav {
-  padding: 14px;
-
-  ul {
-    background-color: #f8f8f8;
-    padding: 10px 10px 15px 10px;
-
-    li {
-      a {
-        padding: 10px;
-
-        &.parent {
-          font-family: $bellota;
-          font-weight: 600;
-          font-size: 17px;
-          border-bottom: .12rem dashed #564949;
-        }
-      }
-      ul li {
-        list-style: disclosure-closed;
-        margin-left: 20px;
-
-        a {
-          &.child {
-            padding: 5px;
-            font-weight: 800;
-            font-family: $quicksand;
-
-            &.active {
-              color: #616161;
-              background-color: #d1c5c4;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.order-by {
-  &.active {
-    color: $dark-pink;
-  }
 }

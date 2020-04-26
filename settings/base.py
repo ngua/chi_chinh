@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'webpack_loader',
-    'recipes.apps.RecipesConfig'
+    'django_dramatiq',
+    'recipes.apps.RecipesConfig',
+    'contact.apps.ContactConfig'
 ]
 
 MIDDLEWARE = [
@@ -156,6 +158,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 RECIPE_PIC_PATH = 'recipe'
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'testserver']
+
+# Redis uri for caching, dramatiq, etc...
+
+REDIS_URI = 'redis://redis:6379'
+
 # Webpack config for react components
 
 WEBPACK_LOADER = {
@@ -179,3 +187,29 @@ VIRTUAL_HOST = os.environ.get('VIRTUAL_HOST', '').split(',')[0]
 # Settings allowed to be exported to templates
 
 SETTINGS_EXPORT = ('VIRTUAL_HOST',)
+
+# Dramatiq settings
+DRAMATIQ_BROKER = {
+    "BROKER": "dramatiq.brokers.redis.RedisBroker",
+    "OPTIONS": {
+        "url": REDIS_URI,
+    },
+    "MIDDLEWARE": [
+        "dramatiq.middleware.AgeLimit",
+        "dramatiq.middleware.TimeLimit",
+        "dramatiq.middleware.Callbacks",
+        "dramatiq.middleware.Retries",
+        "django_dramatiq.middleware.AdminMiddleware",
+        "django_dramatiq.middleware.DbConnectionsMiddleware",
+    ]
+}
+
+DRAMATIQ_RESULT_BACKEND = {
+    "BACKEND": "dramatiq.results.backends.redis.RedisBackend",
+    "BACKEND_OPTIONS": {
+        "url": "redis://localhost:6379",
+    },
+    "MIDDLEWARE_OPTIONS": {
+        "result_ttl": 60000
+    }
+}

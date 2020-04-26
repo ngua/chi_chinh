@@ -2,9 +2,7 @@
 {% load i18n %}
 {% block title %}{{ recipes }}{% endblock %}
 {% block breadcrumb %}
-<ul class="uk-breadcrumb">
-  <li><a href="{% url 'index' %}">{{ home }}</a></li>
-  <li><a href="{% url 'recipes' %}">{{ recipes }}</a></li>
-  {% block sub_crumb %}{% endblock %}
-</ul>
+<li><a href="{% url 'index' %}">{{ home }}</a></li>
+<li><a href="{% url 'recipes' %}">{{ recipes }}</a></li>
+{% block sub_crumb %}{% endblock %}
 {% endblock %}

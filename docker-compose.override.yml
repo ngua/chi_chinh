@@ -12,6 +12,9 @@ services:
     depends_on:
       - db
       - redis
+  dramatiq:
+    env_file:
+      - ./.env.dev
   db:
     image: postgres:12.0-alpine
     volumes:

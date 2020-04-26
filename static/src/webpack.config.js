@@ -6,7 +6,8 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    recipes: './react/recipes.jsx'
+    recipes: './react/recipes/recipes.jsx',
+    contact: './react/contact/contact.jsx'
   },
 
   output: {

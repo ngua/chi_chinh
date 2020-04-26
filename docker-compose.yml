@@ -4,6 +4,14 @@ services:
   web:
     build: .
     image: chi_chinh
+  dramatiq:
+    image: chi_chinh
+    volumes:
+      - ./:/app
+    command: python manage.py rundramatiq --settings=settings.dev
+    depends_on:
+      - web
+      - redis
   redis:
     image: redis:5.0-alpine
     ports:

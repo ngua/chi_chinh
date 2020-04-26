@@ -26,6 +26,8 @@
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.2",
+    "formik": "^2.1.4",
+    "js-cookie": "^2.2.1",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -35,7 +37,8 @@
     "uikit": "^3.4.1",
     "webpack": "^4.42.1",
     "webpack-bundle-tracker": "^0.4.3",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "yup": "^0.28.4"
   },
   "dependencies": {}
 }

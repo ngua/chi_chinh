@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load render_bundle from webpack_loader %}
+{% block head %}
+<script type="text/javascript" src="{% url 'js-catalog' %}"></script>
+{% endblock %}
+{% block title %}{{ contact }}{% endblock %}
+{% block breadcrumb %}
+<li><a href="{% url 'index' %}">{{ home }}</a></li>
+<li><span>{{ contact }}</span></li>
+{% endblock %}
+{% block content %}
+<section class="uk-section uk-section-default uk-section-small" uk-height-viewport="expand: true">
+  <div class="uk-container uk-container-medium uk-animation-fade">
+    <h1 class="heading uk-heading-line"><span>{{ contact }}</span></h1>
+    <div id="contact" class="uk-container uk-background-muted uk-flex uk-flex-center uk-padding-large uk-text-center">
+      {% csrf_token %}
+      {% render_bundle 'contact' %}
+    </div>
+  </div>
+</section>
+{% endblock %}
