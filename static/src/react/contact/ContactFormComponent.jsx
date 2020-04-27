@@ -2,7 +2,7 @@ import React from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Formik, Form, useField } from 'formik';
+import { Formik, Form, Field, useField } from 'formik';
 import { gettext as _ } from 'django';
 
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -63,7 +63,7 @@ const ContactFormComponent = (props) => {
   const requiredMesg = _('This field is required')
   return (
     <Formik
-      initialValues={{ name: '', email: '', message: '' }}
+      initialValues={{ name: '', email: '', message: '', phone: '' }}
       validationSchema={
         yup.object({
           name: yup.string().max(255, _('255 Characters or less')).required(requiredMesg),
@@ -75,7 +75,7 @@ const ContactFormComponent = (props) => {
         setTimeout(() => {
           axios({
             method: 'POST',
-            url: `${window.origin}/contact/api/bbb`,
+            url: `${window.origin}/contact/api/`,
             data: JSON.stringify(values),
             headers: {
               'content-type': 'application/json'
@@ -115,6 +115,7 @@ const ContactFormComponent = (props) => {
           rows={5}
         />
         <CSRFToken />
+        <Field type="text" id="phone" name="phone" placeholder="Please enter your phone" />
         <button type="submit" className="uk-button uk-button-default">{_('Submit')}</button>
       </Form>
     </Formik>
