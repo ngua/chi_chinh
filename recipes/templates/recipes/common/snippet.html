@@ -1,0 +1,34 @@
+{% load i18n chi_chinh_extras %}
+<article class="uk-section-small uk-section-default recipe">
+  <h3 class="uk-margin-remove-bottom">{{ recipe.name }}</h3>
+  {% if recipe.new %}
+  <div class="uk-label new">
+    <span>{% trans 'New' %}</span>
+  </div>
+  {% endif %}
+  {% if recipe.featured %}
+  <div class="uk-label featured">
+    <span>{% trans 'Featured' %}</span>
+  </div>
+  {% endif %}
+  <div>
+    {% for category in recipe.categories.all|slice:":2" %}
+    <div class="uk-label">
+      {{ category }}
+    </div>
+    {% endfor %}
+  </div>
+  <p class="uk-article-meta">{% trans 'Posted on ' %}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% locale_date LANGUAGE_CODE recipe.created %}
+  </p>
+  <p>{{ recipe.description|truncatewords:5|safe }}</p>
+  <div class="uk-grid-small uk-child-width-auto uk-article-meta" uk-grid>
+    <div>
+      <a class="uk-button uk-button-text" href="{{ recipe.get_absolute_url }}"><span uk-icon="chevron-double-right"></span></a>
+    </div>
+    <div>
+      <a class="" href="#" uk-icon="youtube"></a>
+    </div>
+  </div>
+</article>

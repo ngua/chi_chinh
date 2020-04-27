@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta, date
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
@@ -17,6 +18,10 @@ class RecipeManager(models.Manager):
                 'created', 'month', order='DESC'
             )
         ]
+
+    @staticmethod
+    def all_categories():
+        return Category.objects.filter(recipe__isnull=False).distinct()
 
 
 class Category(models.Model):
@@ -39,6 +44,7 @@ class Recipe(models.Model):
     picture = models.ImageField(
         _('picture'), upload_to=settings.RECIPE_PIC_PATH
     )
+    featured = models.BooleanField(_('featured'), default=True)
     created = models.DateField(_('created'), default=timezone.now)
     categories = models.ManyToManyField(Category, verbose_name=_('Categories'))
     slug = models.SlugField(_('slug'), editable=False)
@@ -78,9 +84,12 @@ class Recipe(models.Model):
             zip(categories, list(Recipe.objects.filter(id__in=related)))
         )
 
-    @staticmethod
-    def all_categories():
-        return Category.objects.filter(recipe__isnull=False).distinct()
+    def display_categories(self):
+        return ', '.join([str(category) for category in self.categories.all()])
+
+    @property
+    def new(self):
+        return date.today() - self.created < timedelta(days=7)
 
     def __repr__(self):
         return f"{self.__class__.__name__}'({self.name})'"

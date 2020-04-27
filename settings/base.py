@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_filters',
     'webpack_loader',
     'django_dramatiq',
+    'common.apps.CommonConfig',
     'recipes.apps.RecipesConfig',
     'contact.apps.ContactConfig'
 ]
@@ -182,6 +183,20 @@ REST_FRAMEWORK = {
     ]
 }
 
+# Email settings
+
+EMAIL_SUBJECT_PREFIX = '[Chị Chinh] '
+ADMINS = [(os.environ.get('SU_USERNAME'), os.environ.get('SU_EMAIL'))]
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Vhost
+
 VIRTUAL_HOST = os.environ.get('VIRTUAL_HOST', '').split(',')[0]
 
 # Settings allowed to be exported to templates
@@ -189,6 +204,7 @@ VIRTUAL_HOST = os.environ.get('VIRTUAL_HOST', '').split(',')[0]
 SETTINGS_EXPORT = ('VIRTUAL_HOST',)
 
 # Dramatiq settings
+
 DRAMATIQ_BROKER = {
     "BROKER": "dramatiq.brokers.redis.RedisBroker",
     "OPTIONS": {

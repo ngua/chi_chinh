@@ -131,6 +131,15 @@ img.rounded {
 
 .uk-label {
   background-color: $dark-pink;
+
+  &.featured {
+    background-color: $yellow;
+    color: $light-grey;
+  }
+
+  &.new {
+    background-color: $light-blue;
+  }
 }
 
 .nav-links {

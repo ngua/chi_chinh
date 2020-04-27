@@ -4,7 +4,7 @@
 {% block content %}
 <section class="uk-section uk-section-small">
   <div class="uk-container">
-    <div class="uk-height-large uk-cover-container uk-border-rounded">
+    <div class="uk-height-large uk-cover-container">
       <img src="{% static 'img/hero.jpg' %}" alt="" uk-cover>
       <div id="overlay" class="uk-overlay uk-overlay-primary uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-light uk-text-center">
         <div data-uk-scrollspy="cls: uk-animation-slide-bottom-small">
@@ -15,6 +15,41 @@
           <a href="" class="uk-button uk-button-default uk-margin-top">{{ subscribe }}</a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+<section class="uk-section uk-section-small">
+  <div class="uk-container">
+    <h2 class="heading uk-heading-line uk-text-bold"><span>{% trans 'Featured' %}</span></h2>
+    <div uk-slider>
+      <div class="uk-position-relative">
+        <div class="uk-slider-container uk-dark">
+          <ul class="uk-slider-items uk-child-width-1-2@m">
+            {% for feature in featured %}
+            <li>
+              <div class="uk-grid uk-child-width-1-2">
+                <div class="uk-flex uk-flex-middle">
+                  <img src="{{ feature.picture.url }}" height="350" width="350" alt="">
+                </div>
+                <div>
+                  {% snippet feature %}
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="uk-hidden@s uk-light">
+          <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+          <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
+        </div>
+        <div class="uk-visible@s">
+          <a class="uk-position-center-left-out uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+          <a class="uk-position-center-right-out uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
+        </div>
+      </div>
+      <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+
     </div>
   </div>
 </section>
@@ -29,33 +64,7 @@
             <img class="uk-animation-fade" height=400 width=400 src="{{ recipe.picture.url }}" alt="">
           </div>
           <div class="uk-width-1-2@m">
-            <article class="uk-section-small uk-section-default recipe">
-              <h3 class="">{{ recipe.name }}</h3>
-              <div>
-                {% for category in recipe.categories.all|slice:":6" %}
-                <div class="uk-label">
-                  {{ category }}
-                </div>
-                {% endfor %}
-              </div>
-              <p class="uk-article-meta">{% trans 'Posted on ' %}
-              {% get_current_language as LANGUAGE_CODE %}
-              {% if LANGUAGE_CODE == 'vi' %}
-              {{ recipe.created|date:'d F, Y'}}
-              {% else %}
-              {{ recipe.created|date:'F dS, Y'}}
-              {% endif %}
-              </p>
-              <p>{{ recipe.description|truncatewords:5|safe }}</p>
-              <div class="uk-grid-small uk-child-width-auto uk-article-meta" uk-grid>
-                <div>
-                  <a class="uk-button uk-button-text" href="{{ recipe.get_absolute_url }}"><span uk-icon="chevron-double-right"/></a>
-                </div>
-                <div>
-                  <a class="" href="#" uk-icon="youtube"></a>
-                </div>
-              </div>
-            </article>
+            {% snippet recipe %}
           </div>
         </div>
         {% endfor %}

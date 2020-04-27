@@ -9,12 +9,6 @@ from .filters import RecipeFilter
 from .pagination import PageNumberPaginator
 
 
-def index(request):
-    latest = Recipe.objects.order_by('-created')[:2]
-    context = {'latest': latest}
-    return render(request, 'index.html', context=context)
-
-
 def recipes(request):
     return render(request, 'recipes/recipe_list.html')
 
@@ -29,7 +23,7 @@ class RecipeListAPIView(generics.ListAPIView):
 
     def get(self, request, **kwargs):
         response = super().get(request, **kwargs)
-        all_categories = Recipe.all_categories()
+        all_categories = Recipe.objects.all_categories()
         serializer = CategorySerializer(all_categories, many=True)
         response.data['all'] = serializer.data
         return response

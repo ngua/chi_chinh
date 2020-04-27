@@ -30,3 +30,13 @@ def accordion(recipe):
 def recipe_archive():
     recipe_archive = Recipe.objects.archive()
     return {'recipe_archive': recipe_archive}
+
+
+@register.inclusion_tag('recipes/common/snippet.html')
+def snippet(recipe):
+    return {'recipe': recipe}
+
+
+@register.inclusion_tag('recipes/common/locale_date.html')
+def locale_date(lang_code, date):
+    return {'lang_code': lang_code, 'date': date}

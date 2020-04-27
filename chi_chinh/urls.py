@@ -29,13 +29,15 @@ LAST_MODIFIED = timezone.now()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('recipes.urls')),
+    path('', include('common.urls')),
+    path('recipes/', include('recipes.urls')),
     path('contact/', include('contact.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 urlpatterns += i18n_patterns(
-    path('', include('recipes.urls')),
+    path('', include('common.urls')),
+    path('recipes/', include('recipes.urls')),
     path('contact/', include('contact.urls')),
     path(
         'jsi18n/',

@@ -10,7 +10,7 @@ import { gettext as _ } from 'django';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 UIkit.use(Icons);
-axios.defaults.baseURL = `${window.origin}/api/`;
+axios.defaults.baseURL = `${window.origin}/recipes/`;
 
 class RecipeList extends React.Component {
   signal = axios.CancelToken.source();
@@ -31,7 +31,7 @@ class RecipeList extends React.Component {
     }
   }
 
-  fetchRecipes = async ({url = '/recipes/', params = {}} = {}) => {
+  fetchRecipes = async ({url = '/api/', params = {}} = {}) => {
     axios.get(url, {
       params: params
     })
