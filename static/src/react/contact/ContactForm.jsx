@@ -1,12 +1,15 @@
 import React from 'react';
 import { gettext as _ } from 'django';
 import ContactFormComponent from './ContactFormComponent'
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 class ContactForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: false
+      error: false,
+      success: false
     }
   }
 
@@ -21,6 +24,28 @@ class ContactForm extends React.Component {
     )
   }
 
+  renderSuccess() {
+    return (
+      <>
+        <div>
+          <h1 className="heading">{ _('Thanks for getting in touch!') }</h1>
+          <p className="uk-text-muted">{ _("We'll get back to you soon.") }</p>
+          <Loader type='Oval' color='#949494' height={75} width={75} />
+        </div>
+      </>
+    )
+  }
+
+  successHandler() {
+    this.setState({
+      success: true
+    }, () => {
+      setTimeout(() => {
+        location.replace(window.origin);
+      }, 5000);
+    })
+  }
+
   errorHandler() {
     this.setState({
       error: true
@@ -28,13 +53,15 @@ class ContactForm extends React.Component {
   }
 
   render() {
-    const error = this.state.error;
+    const { error, success } = this.state;
     return (
       <>
         { error ? (
           this.renderError()
+        ) : success ? (
+          this.renderSuccess()
         ) : (
-          <ContactFormComponent errorHandler={() => this.errorHandler()}/>
+          <ContactFormComponent errorHandler={() => this.errorHandler()} successHandler={() => this.successHandler()} />
         ) }
       </>
     )

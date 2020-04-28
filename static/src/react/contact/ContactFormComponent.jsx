@@ -60,7 +60,13 @@ const ContactFormComponent = (props) => {
   const handleError = () => {
     return props.errorHandler();
   }
+
+  const handleSucces = () => {
+    return props.successHandler();
+  }
+
   const requiredMesg = _('This field is required')
+
   return (
     <Formik
       initialValues={{ name: '', email: '', message: '', phone: '' }}
@@ -83,7 +89,7 @@ const ContactFormComponent = (props) => {
           })
             .then((response) => {
               if (response.status === 201) {
-                location.replace(window.origin);
+                handleSucces();
               } else {
                 handleError();
               }
