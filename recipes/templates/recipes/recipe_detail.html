@@ -1,5 +1,5 @@
 {% extends "recipes/base.html" %}
-{% load i18n chi_chinh_extras %}
+{% load i18n bleach_tags chi_chinh_extras %}
 {% block title %}{{ recipe.name }} • {{ block.super }} {% endblock %}
 {% block sub_crumb %}
 <li><span>{{ recipe.name }}</span></li>
@@ -25,7 +25,7 @@
             {% endif %}
           </div>
           <p class="uk-article-meta">{% trans 'Posted on' %} {{ recipe.created|date:'F d, Y' }}</p>
-          <span class="uk-article-lead">{{ recipe.description|safe }}</span>
+          <span class="uk-article-lead">{{ recipe.description|bleach }}</span>
           <hr>
         </article>
       </div>

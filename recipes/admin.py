@@ -4,7 +4,7 @@ from .models import Recipe, Category
 
 
 @admin.register(Recipe)
-class RecipeAdmin(admin.ModelAdmin):
+class RecipeAdmin(TranslationAdmin):
     list_display = ('name', 'display_categories')
     list_filter = ('categories',)
 
@@ -12,15 +12,6 @@ class RecipeAdmin(admin.ModelAdmin):
         ordering = ('-created',)
 
 
-class RecipeTranslationAdmin(RecipeAdmin, TranslationAdmin):
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        field = super().formfield_for_dbfield(db_field, **kwargs)
-        self.patch_translation_field(db_field, field, **kwargs)
-        return field
-
-
+@admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
     pass
-
-
-admin.site.register(Category, CategoryAdmin)

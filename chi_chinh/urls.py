@@ -32,6 +32,7 @@ urlpatterns = [
     path('', include('common.urls')),
     path('recipes/', include('recipes.urls')),
     path('contact/', include('contact.urls')),
+    path('search/', include('search.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
@@ -39,6 +40,7 @@ urlpatterns += i18n_patterns(
     path('', include('common.urls')),
     path('recipes/', include('recipes.urls')),
     path('contact/', include('contact.urls')),
+    path('search/', include('search.urls')),
     path(
         'jsi18n/',
         last_modified(lambda req, **kw: LAST_MODIFIED)(

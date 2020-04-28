@@ -1,5 +1,4 @@
 import os
-from datetime import timedelta, date
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
@@ -9,6 +8,7 @@ from django.db.models import signals
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
+from .tasks import unmark_new_task
 
 
 class RecipeManager(models.Manager):
@@ -44,7 +44,8 @@ class Recipe(models.Model):
     picture = models.ImageField(
         _('picture'), upload_to=settings.RECIPE_PIC_PATH
     )
-    featured = models.BooleanField(_('featured'), default=True)
+    featured = models.BooleanField(_('featured'), default=False)
+    new = models.BooleanField(_('new'), default=True)
     created = models.DateField(_('created'), default=timezone.now)
     categories = models.ManyToManyField(Category, verbose_name=_('Categories'))
     slug = models.SlugField(_('slug'), editable=False)
@@ -63,9 +64,16 @@ class Recipe(models.Model):
         )
 
     def save(self, *args, **kwargs):
+        create_task = False
         if not self.id:
             self.slug = slugify(self.name)
-        return super().save(*args, **kwargs)
+            create_task = True
+        super().save(*args, **kwargs)
+        if create_task:
+            unmark_new_task.send_with_options(
+                args=[self.id],
+                delay=int(600000)
+            )
 
     def get_random_related(self):
         related = []
@@ -86,10 +94,6 @@ class Recipe(models.Model):
 
     def display_categories(self):
         return ', '.join([str(category) for category in self.categories.all()])
-
-    @property
-    def new(self):
-        return date.today() - self.created < timedelta(days=7)
 
     def __repr__(self):
         return f"{self.__class__.__name__}'({self.name})'"

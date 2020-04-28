@@ -1,24 +1,27 @@
-FROM python:3.8.0-alpine
+FROM python:3.8.2-slim-buster
 
 WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apk add build-base musl-dev gcc postgresql-dev python3-dev zlib-dev jpeg-dev openssl-dev libffi-dev gettext-dev \
-        && pip install --upgrade pip
-
+RUN apt-get update && apt-get install -y libpq-dev gcc netcat
 
 WORKDIR /app
 COPY ./requirements /app/requirements
 RUN pip install -r /app/requirements/dev.txt
 
-COPY . /app
-COPY ./entrypoint.sh /app/entrypoint.sh
+RUN apt-get autoremove -y gcc
 
 ENV UNAME=app
 ENV UID=1000
-RUN addgroup -S $UNAME && adduser --disabled-password --gecos '' -S $UNAME -g $UNAME --uid $UID
+ENV GID=1000
+RUN addgroup --system --gid $GID $UNAME && adduser --disabled-password --gecos '' --system --uid $UID $UNAME
+
+WORKDIR /app
+COPY . /app
+COPY ./entrypoint.sh /app/entrypoint.sh
+
 RUN chown $UNAME:$UNAME /app
-USER $user
+USER $UNAME
 
 ENTRYPOINT ["/app/entrypoint.sh"]

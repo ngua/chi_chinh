@@ -38,12 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'ckeditor',
     'rest_framework',
     'django_filters',
     'webpack_loader',
     'django_dramatiq',
+    'django_bleach',
     'common.apps.CommonConfig',
+    'search.apps.SearchConfig',
     'recipes.apps.RecipesConfig',
     'contact.apps.ContactConfig'
 ]
@@ -229,3 +232,44 @@ DRAMATIQ_RESULT_BACKEND = {
         "result_ttl": 60000
     }
 }
+
+# Ckeditor settings
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'custom',
+        'toolbar_custom': [
+            ['Styles', 'Format', 'Font', 'FontSize'],
+            [
+                'Bold', 'Italic', 'Underline', 'Strike', 'Subscript',
+                'Superscript'
+            ],
+            ['HorizontalRule', 'Table', '-', 'Link', 'Unlink'],
+            ['TextColor', 'BGColor'],
+            [
+                'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+                'Blockquote', '-', 'JustifyLeft', 'JustifyCenter',
+                'JustifyRight', 'JustifyBlock'
+            ],
+            ['Undo', 'Redo'],
+            ['RemoveFormat', 'Source'],
+        ]
+    }
+}
+
+# Bleach settings
+
+BLEACH_ALLOWED_TAGS = [
+    'p', 'h1', 'h2', 'h3', 'h4', 'em', 'strong', 'a', 'ul', 'ol', 'li', 'br',
+    'hr', 'span', 's', 'u', 'table', 'thead', 'tbody', 'tr', 'td',
+    'blockquote', 'a'
+]
+BLEACH_ALLOWED_ATTRIBUTES = [
+    'href', 'title', 'name', 'style', 'border', 'cellpadding', 'cellspacing'
+]
+BLEACH_ALLOWED_STYLES = [
+    'font-family', 'font-weight', 'text-decoration', 'font-variant', 'color',
+    'width', 'text-align', 'margin-left'
+]
+BLEACH_STRIP_TAGS = True
+BLEACH_DEFAULT_WIDGET = 'ckeditor.widgets.CKEditorWidget'
