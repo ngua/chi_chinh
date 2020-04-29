@@ -1,0 +1,8 @@
+{% extends "common/errors/base.html" %}
+{% load i18n %}
+{% block status %}
+{% trans 'Forbidden' %}
+{% endblock %}
+{% block message %}
+{% trans 'You've requested something you can't access.' %}
+{% endblock %}

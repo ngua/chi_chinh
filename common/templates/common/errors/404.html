@@ -1,0 +1,8 @@
+{% extends "common/errors/base.html" %}
+{% load i18n %}
+{% block status %}
+{% trans 'Page not found' %}
+{% endblock %}
+{% block message %}
+{% trans 'The page you requested doesn't exist.' %}
+{% endblock %}

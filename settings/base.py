@@ -198,6 +198,11 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+# Admin site
+
+ADMIN_SITE_HEADER = 'Chị Chinh'
+ADMIN_SITE_TITLE = ADMIN_SITE_HEADER
+
 # Vhost
 
 VIRTUAL_HOST = os.environ.get('VIRTUAL_HOST', '').split(',')[0]

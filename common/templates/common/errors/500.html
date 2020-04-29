@@ -1,0 +1,8 @@
+{% extends "common/errors/base.html" %}
+{% load i18n %}
+{% block status %}
+{% trans 'Server error' %}
+{% endblock %}
+{% block message %}
+{% trans 'Sorry, something's gone wrong on the back end.' %}
+{% endblock %}

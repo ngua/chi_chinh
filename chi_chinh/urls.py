@@ -53,3 +53,11 @@ urlpatterns += i18n_patterns(
 if os.environ.get('DJANGO_SETTINGS_MODULE') == 'settings.dev':
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+admin.site.site_header = settings.ADMIN_SITE_HEADER
+admin.site.site_title = settings.ADMIN_SITE_TITLE
+
+handler403 = 'common.views.handler_403'
+handler404 = 'common.views.handler_404'
+handler500 = 'common.views.handler_500'
