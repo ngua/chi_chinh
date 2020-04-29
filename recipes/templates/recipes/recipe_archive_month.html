@@ -20,7 +20,9 @@
       <div id="archive" class="sub-nav">
         <ul class="uk-list">
           {% for recipe in object_list %}
-          {% accordion recipe %}
+          <li>
+            {% accordion recipe %}
+          </li>
           {% endfor %}
         </ul>
       </div>

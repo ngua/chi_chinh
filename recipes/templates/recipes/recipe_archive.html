@@ -23,7 +23,9 @@
                 <div class="uk-accordion-content">
                   <ul class="uk-list uk-list-divider">
                     {% for recipe in month.list %}
-                    {% accordion recipe %}
+                    <li>
+                      {% accordion recipe %}
+                    </li>
                     {% endfor %}
                   </ul>
                 </div>

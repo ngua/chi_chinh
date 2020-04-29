@@ -1,0 +1,13 @@
+@import 'variables';
+
+.results {
+
+  ul {
+    @include result-list;
+
+    li {
+      @include result-list-item;
+      list-style: none;
+    }
+  }
+}

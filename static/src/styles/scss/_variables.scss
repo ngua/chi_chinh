@@ -26,3 +26,15 @@ $quicksand: 'Quicksand', sans-serif;
 @mixin quicksand {
   font-family: $quicksand;
 }
+
+@mixin result-list {
+  background-color: #f8f8f8;
+  padding: 10px 10px 15px 10px;
+}
+
+@mixin result-list-item {
+  font-family: $bellota;
+  font-weight: 600;
+  font-size: 17px;
+  border-bottom: .12rem dashed #564949;
+}

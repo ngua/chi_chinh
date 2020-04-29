@@ -21,22 +21,22 @@ def get_setting(name):
     return getattr(settings, name, '')
 
 
-@register.inclusion_tag('recipes/common/accordion.html')
+@register.inclusion_tag('common/accordion.html')
 def accordion(recipe):
     return {'recipe': recipe}
 
 
-@register.inclusion_tag('recipes/common/archive.html')
+@register.inclusion_tag('common/archive.html')
 def recipe_archive():
     recipe_archive = Recipe.objects.archive()
     return {'recipe_archive': recipe_archive}
 
 
-@register.inclusion_tag('recipes/common/snippet.html')
+@register.inclusion_tag('common/snippet.html')
 def snippet(recipe):
     return {'recipe': recipe}
 
 
-@register.inclusion_tag('recipes/common/locale_date.html')
+@register.inclusion_tag('common/locale_date.html')
 def locale_date(lang_code, date):
     return {'lang_code': lang_code, 'date': date}

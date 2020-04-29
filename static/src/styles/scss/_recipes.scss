@@ -26,18 +26,14 @@
   padding: 14px;
 
   ul {
-    background-color: #f8f8f8;
-    padding: 10px 10px 15px 10px;
+    @include result-list;
 
     li {
       a {
         padding: 10px;
 
         &.parent {
-          font-family: $bellota;
-          font-weight: 600;
-          font-size: 17px;
-          border-bottom: .12rem dashed #564949;
+          @include result-list-item;
         }
       }
       ul li {

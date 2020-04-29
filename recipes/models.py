@@ -72,7 +72,7 @@ class Recipe(models.Model):
         if create_task:
             unmark_new_task.send_with_options(
                 args=[self.id],
-                delay=int(600000)
+                delay=int(int(6.048e+8))
             )
 
     def get_random_related(self):

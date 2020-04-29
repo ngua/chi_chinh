@@ -156,3 +156,8 @@ img.rounded {
   color: $dark-pink;
   font-weight: 700;
 }
+
+.sub-heading {
+  @include quicksand;
+  font-weight: 600;
+}
