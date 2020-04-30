@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jet',
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -224,6 +225,7 @@ DRAMATIQ_BROKER = {
         "dramatiq.middleware.Callbacks",
         "dramatiq.middleware.Retries",
         "django_dramatiq.middleware.AdminMiddleware",
+        "django_dramatiq.middleware.DbConnectionsMiddleware",
         "django_dramatiq.middleware.DbConnectionsMiddleware",
     ]
 }

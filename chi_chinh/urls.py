@@ -34,6 +34,7 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path('search/', include('search.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('jet/', include('jet.urls', 'jet')),
 ]
 
 urlpatterns += i18n_patterns(

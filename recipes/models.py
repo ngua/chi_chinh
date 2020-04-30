@@ -32,7 +32,7 @@ class Category(models.Model):
         verbose_name_plural = _('Categories')
 
     def __repr__(self):
-        return f"{self.__class__.__name__}'({self.name})'"
+        return f"Category('{self.name}')"
 
     def __str__(self):
         return self.name
@@ -72,7 +72,7 @@ class Recipe(models.Model):
         if create_task:
             unmark_new_task.send_with_options(
                 args=[self.id],
-                delay=int(int(6.048e+8))
+                delay=int(6.048e+8)
             )
 
     def get_random_related(self):
@@ -96,7 +96,7 @@ class Recipe(models.Model):
         return ', '.join([str(category) for category in self.categories.all()])
 
     def __repr__(self):
-        return f"{self.__class__.__name__}'({self.name})'"
+        return f"Recipe('{self.name}', '{self.picture}')"
 
     def __str__(self):
         return self.name

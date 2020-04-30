@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import CronJob
 
-# Register your models here.
+
+@admin.register(CronJob)
+class CronJobAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'next_scheduled')
