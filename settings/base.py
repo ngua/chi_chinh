@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'ckeditor',
     'rest_framework',
     'django_filters',
@@ -280,3 +282,7 @@ BLEACH_ALLOWED_STYLES = [
 ]
 BLEACH_STRIP_TAGS = True
 BLEACH_DEFAULT_WIDGET = 'ckeditor.widgets.CKEditorWidget'
+
+# Sites
+
+SITE_ID = 1

@@ -16,3 +16,4 @@ django-dramatiq==0.9.1
 django-bleach==0.6.1
 r-django-jet==2.0.8
 croniter==0.3.31
+sentry-sdk==0.14.3

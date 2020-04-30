@@ -22,9 +22,18 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.views.decorators.http import last_modified
 from django.views.i18n import JavaScriptCatalog
+from django.contrib.sitemaps.views import sitemap
+from recipes.sitemaps import RecipeSitemap
+from common.sitemaps import StaticSiteMap
 
 
 LAST_MODIFIED = timezone.now()
+
+
+sitemaps = {
+    'recipes': RecipeSitemap,
+    'static': StaticSiteMap
+}
 
 
 urlpatterns = [
@@ -35,6 +44,10 @@ urlpatterns = [
     path('search/', include('search.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
     path('jet/', include('jet.urls', 'jet')),
+    path(
+        'sitemap.xml', sitemap, {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap'
+    )
 ]
 
 urlpatterns += i18n_patterns(
@@ -52,8 +65,12 @@ urlpatterns += i18n_patterns(
 )
 
 if os.environ.get('DJANGO_SETTINGS_MODULE') == 'settings.dev':
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT
+    )
 
 
 admin.site.site_header = settings.ADMIN_SITE_HEADER
