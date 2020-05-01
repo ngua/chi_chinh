@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 from django.views.decorators.http import last_modified
 from django.views.i18n import JavaScriptCatalog
 from django.contrib.sitemaps.views import sitemap
+from django.contrib.flatpages import views
 from recipes.sitemaps import RecipeSitemap
 from common.sitemaps import StaticSiteMap
 
@@ -47,7 +48,8 @@ urlpatterns = [
     path(
         'sitemap.xml', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'
-    )
+    ),
+    path('about/', views.flatpage, {'url': '/about/'}, name='about'),
 ]
 
 urlpatterns += i18n_patterns(
@@ -62,6 +64,7 @@ urlpatterns += i18n_patterns(
         ),
         name='js-catalog'
     ),
+    path('about/', views.flatpage, {'url': '/about/'}, name='about'),
 )
 
 if os.environ.get('DJANGO_SETTINGS_MODULE') == 'settings.dev':

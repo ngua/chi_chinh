@@ -1,8 +1,8 @@
 {% extends "common/base.html" %}
-{% load i18n %}
+{% load i18n chi_chinh_extras %}
 {% block title %}{{ recipes }}{% endblock %}
 {% block breadcrumb %}
-<li><a href="{% url 'index' %}">{{ home }}</a></li>
-<li><a href="{% url 'recipes' %}">{{ recipes }}</a></li>
+{% breadcrumb_link home 'index' %}
+{% breadcrumb_link recipes 'recipes' %}
 {% block sub_crumb %}{% endblock %}
 {% endblock %}

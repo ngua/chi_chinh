@@ -21,6 +21,7 @@ WORKDIR /app
 COPY . /app
 COPY ./entrypoint.sh /app/entrypoint.sh
 
+RUN chown -R $UNAME:$UNAME /usr/local/lib/python3.8/site-packages/
 RUN chown $UNAME:$UNAME /app
 USER $UNAME
 

@@ -40,3 +40,13 @@ def snippet(recipe):
 @register.inclusion_tag('common/locale_date.html')
 def locale_date(lang_code, date):
     return {'lang_code': lang_code, 'date': date}
+
+
+@register.inclusion_tag('common/breadcrumb.html')
+def breadcrumb(name):
+    return {'name': name}
+
+
+@register.inclusion_tag('common/breadcrumb_link.html')
+def breadcrumb_link(name, location):
+    return {'name': name, 'location': location}

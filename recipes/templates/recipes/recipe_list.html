@@ -1,11 +1,12 @@
 {% extends "recipes/base.html" %}
-{% load i18n %}
+{% load i18n chi_chinh_extras %}
 {% load render_bundle from webpack_loader %}
 {% block head %}
 <script type="text/javascript" src="{% url 'js-catalog' %}"></script>
 {% endblock %}
 {% block sub_crumb %}
-<li><span>{% trans 'All' %}</span></li>
+{% trans 'All' as all %}
+{% breadcrumb all %}
 {% endblock %}
 {% block content %}
 <section id="top" class="uk-section uk-section-default uk-padding-small" uk-height-viewport="expand: true">

@@ -2,8 +2,8 @@
 {% load i18n chi_chinh_extras %}
 {% block title %}{{ month|date:'M, Y' }} • {{ archive }} • {{ block.super }}{% endblock %}
 {% block sub_crumb %}
-<li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
-<li><span>{{ month|date:'Y' }}</span></li>
+{% breadcrumb_link archive 'recipe-archive' %}
+{% breadcrumb month|date:'Y' %}
 {% endblock %}
 {% block content %}
 <section class="uk-section uk-section-default uk-section-small" uk-height-viewport="expand: true">

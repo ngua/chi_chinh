@@ -2,7 +2,7 @@
 {% load i18n chi_chinh_extras %}
 {% block title %}{{ archive }} • {{ block.super }}{% endblock %}
 {% block sub_crumb %}
-<li><span>{{ archive }}</span></li>
+{% breadcrumb archive %}
 {% endblock %}
 {% block content %}
 {% regroup latest by created|date:'Y' as year_list %}
