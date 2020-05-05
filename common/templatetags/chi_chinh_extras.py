@@ -21,32 +21,42 @@ def get_setting(name):
     return getattr(settings, name, '')
 
 
-@register.inclusion_tag('common/accordion.html')
+@register.inclusion_tag('common/tags/accordion.html')
 def accordion(recipe):
     return {'recipe': recipe}
 
 
-@register.inclusion_tag('common/archive.html')
+@register.inclusion_tag('common/tags/archive.html')
 def recipe_archive():
     recipe_archive = Recipe.objects.archive()
     return {'recipe_archive': recipe_archive}
 
 
-@register.inclusion_tag('common/snippet.html')
+@register.inclusion_tag('common/tags/snippet.html')
 def snippet(recipe):
     return {'recipe': recipe}
 
 
-@register.inclusion_tag('common/locale_date.html')
+@register.inclusion_tag('common/tags/locale_date.html')
 def locale_date(lang_code, date):
     return {'lang_code': lang_code, 'date': date}
 
 
-@register.inclusion_tag('common/breadcrumb.html')
+@register.inclusion_tag('common/tags/breadcrumb.html')
 def breadcrumb(name):
     return {'name': name}
 
 
-@register.inclusion_tag('common/breadcrumb_link.html')
+@register.inclusion_tag('common/tags/breadcrumb_link.html')
 def breadcrumb_link(name, location):
     return {'name': name, 'location': location}
+
+
+@register.inclusion_tag('common/tags/label.html')
+def label(content, selector=''):
+    return {'content': content, 'selector': selector}
+
+
+@register.inclusion_tag('common/tags/srcdoc.html')
+def srcdoc(embed_url, thumbnail):
+    return {'embed_url': embed_url, 'thumbnail': thumbnail}

@@ -24,6 +24,7 @@ from django.views.decorators.http import last_modified
 from django.views.i18n import JavaScriptCatalog
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.flatpages import views
+from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from recipes.sitemaps import RecipeSitemap
 from common.sitemaps import StaticSiteMap
 
@@ -33,7 +34,8 @@ LAST_MODIFIED = timezone.now()
 
 sitemaps = {
     'recipes': RecipeSitemap,
-    'static': StaticSiteMap
+    'static': StaticSiteMap,
+    'flatpages': FlatPageSitemap
 }
 
 

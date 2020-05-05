@@ -8,6 +8,7 @@
 {% trans 'Subscribe' as subscribe %}
 {% trans 'Archive' as archive %}
 {% trans 'See more' as see_more %}
+{% trans 'Featured' as featured %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,6 +17,7 @@
     <meta name="robots" content="ALL">
     <meta name="keywords" content="cooking, vietnam, vietnamese, food">
     <meta name="description" content="The home of Chị Chinh's cooking and recipe blog.">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/css/app.css' %}" />
     {% block head %}{% endblock %}
@@ -39,9 +41,9 @@
                   <ul class="uk-nav uk-dropdown-nav">
                     <li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
                     <li><a href="{% url 'contact' %}">{{ contact }}</a></li>
-                    <li><a href="#">{{ about }}</a></li>
+                    <li><a href="{% url 'about' %}">{{ about }}</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="#">{{ channel }}</a></li>
+                    <li><a href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg">{{ channel }}</a></li>
                     <li><a href="#">{{ subscribe }}</a></li>
                   </ul>
                 </div>
@@ -52,7 +54,7 @@
             <a id="brand" class="uk-navbar-item uk-logo" href="{% url 'index' %}" title="Logo">Chị Chinh </a>
           </div>
           <div class="uk-navbar-right nav-overlay">
-            <a class="uk-visible@s nav-links" href="#" uk-icon="youtube"></a>
+            <a class="uk-visible@s nav-links" href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg" uk-icon="youtube"></a>
             <a class="uk-visible@s nav-links" href="#" uk-icon="facebook"></a>
             <a class="uk-navbar-toggle uk-visible@m" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
             <div class="uk-navbar-item">
@@ -80,37 +82,54 @@
         </nav>
       </div>
     </header>
-    <div class="uk-container uk-visible@m">
-      <nav id="sub-nav">
-        <ul class="uk-subnav uk-flex uk-flex-between@m">
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'index' %}">{{ home }}</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'recipes' %}">{{ recipes }}</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'contact' %}">{{ contact }}</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ about }}</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ channel }}</a></li>
-          <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ subscribe }}</a></li>
+    <main id="main" class="uk-container uk-container-xlarge">
+      <div class="uk-container uk-visible@m">
+        <nav id="sub-nav">
+          <ul class="uk-subnav uk-flex uk-flex-between@m">
+            <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'index' %}">{{ home }}</a></li>
+            <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'recipes' %}">{{ recipes }}</a></li>
+            <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'contact' %}">{{ contact }}</a></li>
+            <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'about' %}">{{ about }}</a></li>
+            <li><a class="uk-button uk-button-text uk-button-small@s" href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg">{{ channel }}</a></li>
+            <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ subscribe }}</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="uk-container uk-flex uk-flex-center uk-padding-small uk-padding-remove-bottom">
+        <ul class="uk-breadcrumb">
+          {% block breadcrumb %}
+          {% endblock %}
         </ul>
-      </nav>
-    </div>
-    <div class="uk-container uk-flex uk-flex-center uk-padding-small uk-padding-remove-bottom">
-      <ul class="uk-breadcrumb">
-        {% block breadcrumb %}
-        {% endblock %}
-      </ul>
-    </div>
-    {% block content %}{% endblock %}
+      </div>
+      {% block content %}{% endblock %}
+    </main>
     <footer class="uk-section uk-section-small uk-section-muted">
       <div class="uk-container">
-        <div class="uk-grid uk-grid-large" uk-grid>
-          <div class="uk-width-1-2@m">
-            <p class="uk-text-small">&copy; 2020 Chị Chinh</p>
-            <div class="uk-inline">
-              <a href="#" class="uk-icon-button" uk-icon="youtube"></a>
-              <a href="#" class="uk-icon-button" uk-icon="facebook"></a>
-              <a href="#" class="uk-icon-button" uk-icon="mail"></a>
-            </div>
+        <div class="uk-grid uk-grid-large uk-grid-divider" uk-grid>
+          <div class="uk-width-1-5@m">
+            <ul class="uk-nav">
+              <li class="uk-parent uk-text-small">
+                <a href="{% url 'index' %}">{{ home }}</a>
+                <ul class="uk-nav-sub">
+                  <li><a href="{% url 'recipes' %}"><small>{{ recipes }}</small></a></li>
+                  <li><a href="{% url 'recipe-archive' %}"><small>{{ archive }}</small></a></li>
+                  <li><a href="{% url 'about' %}"><small>{{ about }}</small></a></li>
+                  <li><a href="{% url 'contact' %}"><small>{{ contact }}</small></a></li>
+                </ul>
+              </li>
+            </ul>
           </div>
-          <div class="uk-width-1-2@m">
+          <div class="uk-width-1-5@m">
+            <h4 class="heading">Chị Chinh</h4>
+            <p class="uk-text-small uk-text-muted">&copy; {% now 'Y' %} Chị Chinh</p>
+          </div>
+          <div class="uk-width-2-5@m">
+            <div class="uk-inline">
+              <a href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg" class="uk-icon-button" uk-icon="youtube"></a>
+              <a href="#" class="uk-icon-button" uk-icon="facebook"></a>
+              <a href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg" class="uk-icon-button" uk-icon="mail"></a>
+              <a class="" href="">{{ subscribe|upper }}</a>
+            </div>
             <div class="uk-inline">
             </div>
           </div>
@@ -126,7 +145,7 @@
             <ul class="uk-nav-sub">
               <li><a href="{% url 'recipes' %}">{{ recipes }}</a></li>
               <li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
-              <li><a href="#">{{ about }}</a></li>
+              <li><a href="{% url 'about' %}">{{ about }}</a></li>
               <li><a href="{% url 'contact' %}">{{ contact }}</a></li>
             </ul>
             <hr>

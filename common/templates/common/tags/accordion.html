@@ -1,3 +1,4 @@
+{% load chi_chinh_extras %}
   <div class="uk-grid uk-grid-divider" uk-grid>
     <div class="uk-width-auto@m">
       <div class="uk-inline">
@@ -14,9 +15,7 @@
     <div class="uk-width-expand@m">
       <div class="uk-margin">
         {% for category in recipe.categories.all|slice:":6" %}
-        <div class="uk-label">
-          {{ category }}
-        </div>
+        {% label category %}
         {% endfor %}
       </div>
       <small class="uk-text-muted">{{ recipe.created|date:'Y/m/d' }}</small>
@@ -24,6 +23,6 @@
     </div>
     <div class="uk-width-auto@m uk-flex uk-flex-middle uk-margin-remove">
       <a class="uk-button uk-button-text" href="{{ recipe.get_absolute_url }}"><span uk-icon="chevron-double-right"></span></a>
-      <a class="" href="#" uk-icon="youtube"></a>
+      <a href="{{ recipe.url }}" target="_blank" uk-icon="youtube"></a>
     </div>
   </div>

@@ -33,7 +33,7 @@ def cron(crontab):
     return inner
 
 
-def start():
+def start(scheduler=scheduler):
     for cronjob in CronJob.objects.all():
-        cronjob.schedule_job(scheduler)
+        cronjob.schedule_job(scheduler=scheduler)
     scheduler.start()

@@ -1,4 +1,5 @@
 import os
+import re
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
@@ -74,6 +75,19 @@ class Recipe(models.Model):
                 args=[self.id],
                 delay=int(6.048e+8)
             )
+
+    def get_embed_url(self):
+        pattern = re.compile(
+            r'(https://)(?:www\.)?(youtube\.com)/(?:watch\?.*?'
+            '(?=v=)v=|v/|.+\?v=)?([^&=%\?]{11})'
+        )
+        m = re.match(pattern, self.url)
+        try:
+            embed = f'{m.group(1)}{m.group(2)}/embed/{m.group(3)}'
+            thumbnail = f'https://i3.ytimg.com/vi/{m.group(3)}/hqdefault.jpg'
+            return embed, thumbnail
+        except AttributeError:
+            return None, None
 
     def get_random_related(self):
         related = []

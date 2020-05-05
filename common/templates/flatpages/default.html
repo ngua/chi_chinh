@@ -2,5 +2,14 @@
 {% load bleach_tags %}
 {% block title %}{{ flatpage.title }}{{ block.super }}{% endblock %}
 {% block content %}
-{{ flatpage.content|bleach }}
+<div class="uk-section uk-section-default uk-section-small" uk-height-viewport="expand: true">
+  <div class="uk-container uk-animation-fade">
+    <div>
+      <h1 class="heading uk-heading-line"><span>{{ flatpage.title }}</span></h1>
+    </div>
+    <div>
+      {{ flatpage.content|bleach }}
+    </div>
+  </div>
+</div>
 {% endblock %}

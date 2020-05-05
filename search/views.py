@@ -1,9 +1,12 @@
 from django.db.models.functions import Greatest
 from django.views.generic import ListView
 from django.contrib.postgres.search import TrigramSimilarity
+from django.views.decorators.http import require_safe
+from django.utils.decorators import method_decorator
 from recipes.models import Recipe
 
 
+@method_decorator(require_safe, name='dispatch')
 class RecipeSearchListView(ListView):
     model = Recipe
     template_name = 'search/results.html'
@@ -22,7 +25,7 @@ class RecipeSearchListView(ListView):
                     TrigramSimilarity('categories__name_en', q),
                     TrigramSimilarity('categories__name_vi', q),
                 )
-            ).filter(similarity__gte=0.2).order_by('-similarity').distinct()
+            ).filter(similarity__gte=0.1).order_by('-similarity').distinct()
             self.total = len(qs)
             self.q = q
         return qs

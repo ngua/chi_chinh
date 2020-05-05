@@ -12,17 +12,17 @@ RUN pip install -r /app/requirements/dev.txt
 
 RUN apt-get autoremove -y gcc
 
-ENV UNAME=app
+ENV USERNAME=app
 ENV UID=1000
 ENV GID=1000
-RUN addgroup --system --gid $GID $UNAME && adduser --disabled-password --gecos '' --system --uid $UID $UNAME
+RUN addgroup --system --gid $GID $USERNAME && adduser --disabled-password --gecos '' --system --uid $UID $USERNAME
 
 WORKDIR /app
 COPY . /app
 COPY ./entrypoint.sh /app/entrypoint.sh
 
-RUN chown -R $UNAME:$UNAME /usr/local/lib/python3.8/site-packages/
-RUN chown $UNAME:$UNAME /app
-USER $UNAME
+RUN chown -R $USERNAME:$USERNAME /usr/local/lib/python3.8/site-packages/
+RUN chown -R $USERNAME:$USERNAME /app
+USER $USERNAME
 
 ENTRYPOINT ["/app/entrypoint.sh"]

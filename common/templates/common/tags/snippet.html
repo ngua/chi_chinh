@@ -1,21 +1,17 @@
 {% load i18n bleach_tags chi_chinh_extras %}
+{% trans 'Featured' as featured %}
+{% trans 'New' as new %}
 <article class="uk-section-small uk-section-default recipe">
   <h3 class="uk-margin-remove-bottom">{{ recipe.name }}</h3>
   {% if recipe.new %}
-  <div class="uk-label new">
-    <span>{% trans 'New' %}</span>
-  </div>
+  {% label new 'new' %}
   {% endif %}
   {% if recipe.featured %}
-  <div class="uk-label featured">
-    <span>{% trans 'Featured' %}</span>
-  </div>
+  {% label featured 'featured' %}
   {% endif %}
   <div>
     {% for category in recipe.categories.all|slice:":2" %}
-    <div class="uk-label">
-      {{ category }}
-    </div>
+    {% label category %}
     {% endfor %}
   </div>
   <p class="uk-article-meta">{% trans 'Posted on ' %}
@@ -28,7 +24,7 @@
       <a class="uk-button uk-button-text" href="{{ recipe.get_absolute_url }}"><span uk-icon="chevron-double-right"></span></a>
     </div>
     <div>
-      <a class="" href="#" uk-icon="youtube"></a>
+      <a href="{{ recipe.url }}" target="_blank" uk-icon="youtube"></a>
     </div>
   </div>
 </article>

@@ -25,7 +25,7 @@ class CronJob(models.Model):
         )
 
     def __repr__(self):
-        return f"CronJob('{self.name}', '{self.module}', '{self.trigger}')"
+        return f"CronJob('{self.name}', '{self.module}', '{self.crontab}')"
 
     def __str__(self):
         return f'{self.module}:{self.name}.send'

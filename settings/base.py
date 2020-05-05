@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'testserver']
 
 
 # Application definition
@@ -95,8 +95,9 @@ DATABASES = {
         'ENGINE': os.environ.get('SQL_ENGINE'),
         'USER': os.environ.get('SQL_USER'),
         'PASSWORD': os.environ.get('SQL_PASSWORD'),
-        'NAME': os.environ.get('SQL_NAME'),
-        'HOST': os.environ.get('SQL_HOST'),
+        'NAME': os.environ.get('SQL_DATABASE'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '5432'),
     }
 }
 
@@ -166,7 +167,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 RECIPE_PIC_PATH = 'recipe'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'testserver']
 
 # Redis uri for caching, dramatiq, etc...
 
@@ -194,13 +194,6 @@ REST_FRAMEWORK = {
 
 EMAIL_SUBJECT_PREFIX = '[Chị Chinh] '
 ADMINS = [(os.environ.get('SU_USERNAME'), os.environ.get('SU_EMAIL'))]
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Admin site
 
@@ -278,7 +271,7 @@ BLEACH_ALLOWED_ATTRIBUTES = [
     'href', 'title', 'name', 'style', 'border', 'cellpadding', 'cellspacing'
 ]
 BLEACH_ALLOWED_STYLES = [
-    'font-family', 'font-weight', 'text-decoration', 'font-variant', 'color',
+    'font-family', 'font-weight', 'font-size', 'text-decoration', 'font-variant', 'color',
     'width', 'text-align', 'margin-left'
 ]
 BLEACH_STRIP_TAGS = True

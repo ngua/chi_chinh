@@ -20,19 +20,19 @@
 </section>
 <section class="uk-section uk-section-small">
   <div class="uk-container">
-    <h2 class="heading uk-heading-line uk-text-bold"><span>{% trans 'Featured' %}</span></h2>
+    <h2 class="heading uk-heading-line uk-text-bold"><span>{{ featured }}</span></h2>
     <div uk-slider>
       <div class="uk-position-relative">
         <div class="uk-slider-container uk-dark">
           <ul class="uk-slider-items uk-child-width-1-2@m">
-            {% for feature in featured %}
+            {% for recipe in featured_recipes %}
             <li>
               <div class="uk-grid uk-child-width-1-2">
                 <div class="uk-flex uk-flex-middle">
-                  <img src="{{ feature.picture.url }}" height="350" width="350" alt="">
+                  <img src="{{ recipe.picture.url }}" height="350" width="350" alt="">
                 </div>
                 <div>
-                  {% snippet feature %}
+                  {% snippet recipe %}
                 </div>
               </div>
             </li>
@@ -85,6 +85,7 @@
               <div class="uk-width-expand">
                 <h4 class="heading">Chị Chinh</h4>
                 <p class="uk-text-muted">Thanks for stopping by!</p>
+                <a class="uk-button uk-button-text uk-text-muted" href="{% url 'contact' %}">{% trans 'Read more' %} >></a>
               </div>
             </div>
           </section>
