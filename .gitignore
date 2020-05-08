@@ -1,7 +1,10 @@
 __pycache__/
 *.py[cod]
 .env*
-.vim
+web.dev.sh
+.coverage
+.vim/
+redis/
 media/
 static/img/*
 static/styles/css/*
@@ -10,5 +13,3 @@ static/src/bundles
 static/src/package-lock.json
 static/src/.stylelintrc.json
 static/src/webpack-stats.json
-web.dev.sh
-.coverage

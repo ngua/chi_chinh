@@ -15,11 +15,10 @@ const CSRFToken = () => {
   )
 }
 
-const WrappedFormComponent = ({ label, WrappedComponent, ...props }) => {
+const WrappedFormComponent = ({ WrappedComponent, ...props }) => {
   const [field, meta] = useField(props);
   return(
     <div className="uk-margin field">
-      <label htmlFor={props.name} className="">{label}</label>
       <div className="uk-form-controls">
         <WrappedComponent
           { ...field }
@@ -65,16 +64,16 @@ const ContactFormComponent = (props) => {
     return props.successHandler();
   }
 
-  const requiredMesg = _('This field is required')
+  const requiredMsg = _('This field is required')
 
   return (
     <Formik
       initialValues={{ name: '', email: '', message: '', phone: '' }}
       validationSchema={
         yup.object({
-          name: yup.string().max(255, _('255 Characters or less')).required(requiredMesg),
-          email: yup.string().email(_('Please enter a valid email address')).required(requiredMesg),
-          message: yup.string().required(requiredMesg)
+          name: yup.string().max(255, _('255 Characters or less')).required(requiredMsg),
+          email: yup.string().email(_('Please enter a valid email address')).required(requiredMsg),
+          message: yup.string().required(requiredMsg)
         })
       }
       onSubmit={(values, { setSubmitting }) => {
@@ -104,19 +103,19 @@ const ContactFormComponent = (props) => {
       <Form className="uk-form-stacked uk-width-4-5">
         <WrappedFormComponent
           WrappedComponent={InputComponent}
-          label={_('Name')}
+          placeholder={_('Name')}
           name='name'
           type='text'
         />
         <WrappedFormComponent
           WrappedComponent={InputComponent}
-          label={_('Email')}
+          placeholder={_('Email')}
           name='email'
           type='text'
         />
         <WrappedFormComponent
           WrappedComponent={TextAreaComponent}
-          label={_('Message')}
+          placeholder={_('Message')}
           name='message'
           rows={5}
         />

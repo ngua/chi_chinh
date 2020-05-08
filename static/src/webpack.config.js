@@ -11,12 +11,12 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve('./bundles/'),
+    path: path.resolve('../bundles/'),
     filename: '[name].js',
   },
 
   plugins: [
-    new BundleTracker({filename: './webpack-stats.json'}),
+    new BundleTracker({filename: '../webpack-stats.json'}),
   ],
 
   module: {

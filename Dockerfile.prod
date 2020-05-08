@@ -1,0 +1,57 @@
+# Build
+
+FROM python:3.8.2-slim-buster as builder
+
+WORKDIR /static
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update && apt-get install -y  curl libpq-dev gcc netcat
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+COPY ./static/ .
+
+WORKDIR /static/src
+RUN npm install
+RUN npm run webpack:compile:prod && npm run scss:compile
+
+WORKDIR /app
+
+COPY ./requirements /app/requirements
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements/prod.txt
+
+# Final
+
+FROM python:3.8.2-slim-buster
+RUN apt-get update && apt-get install -y libpq-dev gcc netcat
+
+COPY --from=builder /app/wheels /wheels
+COPY --from=builder /app/requirements/prod.txt .
+RUN pip install --no-cache /wheels/*
+
+RUN apt-get autoremove -y gcc
+
+ENV USERNAME=app
+ENV UID=1000
+RUN addgroup --system --gid $UID $USERNAME && adduser --disabled-password --gecos '' --system --uid $UID $USERNAME
+ENV APP_HOME=/home/app/web
+RUN mkdir /home/app/web
+RUN mkdir $APP_HOME/staticfiles
+RUN mkdir $APP_HOME/mediafiles
+
+WORKDIR $APP_HOME
+COPY ./entrypoint.prod.sh $APP_HOME
+COPY . $APP_HOME
+COPY --from=builder /static $APP_HOME/static/bundles/
+COPY --from=builder /static $APP_HOME/static/styles/
+
+RUN chown -R $USERNAME:$USERNAME /usr/local/lib/python3.8/site-packages/
+RUN chown -R $USERNAME:$USERNAME $APP_HOME
+RUN chown -R $USERNAME:$USERNAME $APP_HOME/staticfiles
+RUN chown -R $USERNAME:$USERNAME $APP_HOME/mediafiles
+
+USER $USERNAME
+
+ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]

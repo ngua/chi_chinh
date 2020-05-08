@@ -7,7 +7,7 @@
 <section class="uk-section uk-section-default uk-section-small" uk-height-viewport="expand: true">
   <div class="uk-container uk-container-medium uk-animation-fade">
     <h1 class="heading uk-heading-line"><span>{% trans 'Search Results' %}</span></h1>
-    <h4 class="sub-heading uk-margin-remove-top uk-text-muted">{{ total }} {% trans 'results for' %} "{{ query }}"</h4>
+    <h4 class="sub-heading uk-margin-remove-top uk-text-muted">{{ total }} {% trans 'results for' context 'results of the previous query' %} "{{ query }}"</h4>
     <div class="results">
       <ul uk-accordion="multiple: true;">
         {% for recipe in page_obj %}

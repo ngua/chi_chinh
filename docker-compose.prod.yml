@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - 8000:8000
+    privileged: true
+    image: chi_chinh
+    command: gunicorn chi_chinh.wsgi:application --bind 0.0.0.0:8000 --workers=2
+    env_file:
+      - ./.env.prod
+    networks:
+      - app
+    restart: unless-stopped
+
+  dramatiq:
+    image: chi_chinh
+    command: python manage.py rundramatiq --settings=settings.prod
+    env_file:
+      - ./.env.prod
+    networks:
+      - app
+
+  redis:
+    command: ['redis-server', '/etc/redis/redis.conf']
+    volumes:
+      - redis_data:/var/libredis/data
+      - ./redis/redis.conf:/etc/redis/redis.conf
+    networks:
+      - app
+    restart: always
+
+volumes:
+  redis_data:
+
+networks:
+  app:

@@ -176,8 +176,8 @@ REDIS_URI = 'redis://redis:6379'
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': os.path.join('src', 'bundles/'),
-        'STATS_FILE': os.path.join(BASE_DIR, 'static', 'src', 'webpack-stats.json'),
+        'BUNDLE_DIR_NAME': '/bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'static', 'webpack-stats.json'),
     }
 }
 

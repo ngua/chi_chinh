@@ -1,18 +1,14 @@
 from time import sleep
 from threading import Thread
-from django.db import connection
-from apscheduler.schedulers.background import BackgroundScheduler
+from django.db import connection, ProgrammingError
 from .models import CronJob
 
 
-scheduler = BackgroundScheduler()
-
-
-def wait_for_db(table_name, retries=10):
+def wait_for_db(table_name, retries=1000):
     for _ in range(retries):
         tables = connection.introspection.table_names()
         if table_name not in tables:
-            sleep(1)
+            sleep(10)
             continue
         return
 
@@ -23,17 +19,14 @@ def cron(crontab):
     t.join()
 
     def inner(actor):
-        CronJob.objects.update_or_create(**{
-            'module': actor.fn.__module__,
-            'name': actor.fn.__name__,
-            'crontab': crontab
-        })
+        try:
+            CronJob.objects.update_or_create(**{
+                'module': actor.fn.__module__,
+                'name': actor.fn.__name__,
+                'crontab': crontab
+            })
+        except ProgrammingError:
+            pass
         return actor
 
     return inner
-
-
-def start(scheduler=scheduler):
-    for cronjob in CronJob.objects.all():
-        cronjob.schedule_job(scheduler=scheduler)
-    scheduler.start()

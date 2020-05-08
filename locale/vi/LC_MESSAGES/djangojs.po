@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-26 11:47+0000\n"
+"POT-Creation-Date: 2020-05-05 11:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: static/src/react/contact/ContactForm.jsx:49
+#: static/src/react/contact/ContactForm.jsx:20
+msgid "We're sorry, something went wrong."
+msgstr ""
+
+#: static/src/react/contact/ContactForm.jsx:21
+msgid "Please try to get in touch again."
+msgstr ""
+
+#: static/src/react/contact/ContactForm.jsx:31
+msgid "Thanks for getting in touch!"
+msgstr ""
+
+#: static/src/react/contact/ContactForm.jsx:32
+msgid "We'll get back to you soon."
+msgstr ""
+
+#: static/src/react/contact/ContactFormComponent.jsx:67
 msgid "This field is required"
 msgstr "Trường này cần thiết"
 
-#: static/src/react/contact/ContactForm.jsx:55
+#: static/src/react/contact/ContactFormComponent.jsx:74
 msgid "255 Characters or less"
 msgstr "Tối đa 255 chữ"
 
-#: static/src/react/contact/ContactForm.jsx:56
+#: static/src/react/contact/ContactFormComponent.jsx:75
 msgid "Please enter a valid email address"
 msgstr "Hãy nhập vào địa chỉ email hợp lệ"
 
-#: static/src/react/contact/ContactForm.jsx:70
+#: static/src/react/contact/ContactFormComponent.jsx:106
 msgid "Name"
 msgstr "Tên"
 
-#: static/src/react/contact/ContactForm.jsx:76
+#: static/src/react/contact/ContactFormComponent.jsx:112
 msgid "Email"
 msgstr "Địa chỉ email"
 
-#: static/src/react/contact/ContactForm.jsx:82
+#: static/src/react/contact/ContactFormComponent.jsx:118
 msgid "Message"
 msgstr "Nội dung"
 
-#: static/src/react/contact/ContactForm.jsx:86
+#: static/src/react/contact/ContactFormComponent.jsx:124
 msgid "Submit"
 msgstr "Gửi liên hệ"
 
