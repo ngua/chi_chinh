@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'django.contrib.postgres',
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -152,10 +153,10 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
@@ -168,9 +169,19 @@ MEDIA_URL = '/media/'
 RECIPE_PIC_PATH = 'recipe'
 
 
+# Email settings
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 # Redis uri for caching, dramatiq, etc...
 
-REDIS_URI = 'redis://redis:6379'
+# REDIS_URI = 'redis://redis:6379'
+REDIS_URI = os.environ.get('REDIS_URI')
 
 # Webpack config for react components
 
@@ -229,7 +240,7 @@ DRAMATIQ_BROKER = {
 DRAMATIQ_RESULT_BACKEND = {
     "BACKEND": "dramatiq.results.backends.redis.RedisBackend",
     "BACKEND_OPTIONS": {
-        "url": "redis://localhost:6379",
+        "url": REDIS_URI,
     },
     "MIDDLEWARE_OPTIONS": {
         "result_ttl": 60000

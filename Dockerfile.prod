@@ -44,8 +44,8 @@ RUN mkdir $APP_HOME/mediafiles
 WORKDIR $APP_HOME
 COPY ./entrypoint.prod.sh $APP_HOME
 COPY . $APP_HOME
-COPY --from=builder /static $APP_HOME/static/bundles/
-COPY --from=builder /static $APP_HOME/static/styles/
+COPY --from=builder /static/bundles $APP_HOME/static/bundles/
+COPY --from=builder /static/styles $APP_HOME/static/styles/
 
 RUN chown -R $USERNAME:$USERNAME /usr/local/lib/python3.8/site-packages/
 RUN chown -R $USERNAME:$USERNAME $APP_HOME
