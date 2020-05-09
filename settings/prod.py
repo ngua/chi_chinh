@@ -53,7 +53,6 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_LOCATION = 'static'
 AWS_DEFAULT_ACL = 'public-read'
 
-
 # Redis
 
 REDIS_URI = os.environ.get('REDIS_URI')
