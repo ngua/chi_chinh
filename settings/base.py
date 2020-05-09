@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'rest_framework',
     'django_filters',
-    'webpack_loader',
     'django_dramatiq',
     'django_bleach',
     'common.apps.CommonConfig',
@@ -152,10 +151,10 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
@@ -168,18 +167,19 @@ MEDIA_URL = '/media/'
 RECIPE_PIC_PATH = 'recipe'
 
 
+# Email settings
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 # Redis uri for caching, dramatiq, etc...
 
-REDIS_URI = 'redis://redis:6379'
-
-# Webpack config for react components
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': '/bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'static', 'webpack-stats.json'),
-    }
-}
+# REDIS_URI = 'redis://redis:6379'
+REDIS_URI = os.environ.get('REDIS_URI')
 
 # Rest framework settings
 
@@ -200,13 +200,9 @@ ADMINS = [(os.environ.get('SU_USERNAME'), os.environ.get('SU_EMAIL'))]
 ADMIN_SITE_HEADER = 'Chị Chinh'
 ADMIN_SITE_TITLE = ADMIN_SITE_HEADER
 
-# Vhost
-
-VIRTUAL_HOST = os.environ.get('VIRTUAL_HOST', '').split(',')[0]
-
 # Settings allowed to be exported to templates
 
-SETTINGS_EXPORT = ('VIRTUAL_HOST',)
+SETTINGS_EXPORT = []
 
 # Dramatiq settings
 
@@ -229,7 +225,7 @@ DRAMATIQ_BROKER = {
 DRAMATIQ_RESULT_BACKEND = {
     "BACKEND": "dramatiq.results.backends.redis.RedisBackend",
     "BACKEND_OPTIONS": {
-        "url": "redis://localhost:6379",
+        "url": REDIS_URI,
     },
     "MIDDLEWARE_OPTIONS": {
         "result_ttl": 60000

@@ -1,6 +1,5 @@
 {% extends "common/base.html" %}
-{% load i18n %}
-{% load render_bundle from webpack_loader %}
+{% load static i18n %}
 {% block head %}
 <script type="text/javascript" src="{% url 'js-catalog' %}"></script>
 {% endblock %}
@@ -15,7 +14,7 @@
     <h1 class="heading uk-heading-line"><span>{{ contact }}</span></h1>
     <div id="contact" class="uk-container uk-background-muted uk-flex uk-flex-center uk-padding-large uk-text-center">
       {% csrf_token %}
-      {% render_bundle 'contact' %}
+      <script src="{% static 'bundles/contact.js' %}"></script>
     </div>
   </div>
 </section>

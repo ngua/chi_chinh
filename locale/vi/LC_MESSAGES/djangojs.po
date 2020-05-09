@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 11:00+0000\n"
+"POT-Creation-Date: 2020-05-09 11:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,19 +20,19 @@ msgstr ""
 
 #: static/src/react/contact/ContactForm.jsx:20
 msgid "We're sorry, something went wrong."
-msgstr ""
+msgstr "Chúng tôi xin lỗi về sai sót này"
 
 #: static/src/react/contact/ContactForm.jsx:21
 msgid "Please try to get in touch again."
-msgstr ""
+msgstr "Xin hãy liên lạc lại."
 
 #: static/src/react/contact/ContactForm.jsx:31
 msgid "Thanks for getting in touch!"
-msgstr ""
+msgstr "Cảm ơn vì đã liên lạc với chúng tôi"
 
 #: static/src/react/contact/ContactForm.jsx:32
 msgid "We'll get back to you soon."
-msgstr ""
+msgstr "Chúng tôi sẽ trả lời sớm"
 
 #: static/src/react/contact/ContactFormComponent.jsx:67
 msgid "This field is required"

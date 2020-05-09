@@ -3,9 +3,9 @@
 {{ status }}
 {% endblock %}
 {% block content %}
-<section class="left-offset uk-section" uk-height-viewport>
+<section class="left-offset uk-section" uk-height-viewport="expand: true;">
   <div class="uk-container uk-container-large uk-background-muted uk-padding-large">
-    <div class="uk-grid uk-child-width-1-2@m" uk-grid>
+    <div class="uk-grid uk-child-width-1-2@m uk-padding-large" uk-grid>
       <div>
         <h1 class="uk-text-muted">{{ status }}</h1>
         <h1 class="heading">{% block status %}{% endblock%}</h1>

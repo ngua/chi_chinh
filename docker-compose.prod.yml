@@ -6,14 +6,18 @@ services:
       context: .
       dockerfile: Dockerfile.prod
     ports:
-      - 8000:8000
+      - 8001:8001
     privileged: true
     image: chi_chinh
-    command: gunicorn chi_chinh.wsgi:application --bind 0.0.0.0:8000 --workers=2
+    command: gunicorn chi_chinh.wsgi:application --bind 0.0.0.0:8001 --workers=2 --worker-tmp-dir /dev/shm
+    volumes:
+      - static:/home/app/web/staticfiles
+      - media:/home/app/web/mediafiles
     env_file:
       - ./.env.prod
     networks:
       - app
+      - proxy
     restart: unless-stopped
 
   dramatiq:
@@ -35,6 +39,11 @@ services:
 
 volumes:
   redis_data:
+  static:
+  media:
 
 networks:
   app:
+  proxy:
+    external:
+      name: nginx-proxy

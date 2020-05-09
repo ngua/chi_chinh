@@ -4,6 +4,7 @@ from django.views.generic.dates import ArchiveIndexView, MonthArchiveView
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django.contrib.sites.models import Site
 from django.conf import settings
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
@@ -49,6 +50,7 @@ class RecipeDetailView(DetailView):
         context['related'] = related
         context['embed_url'] = embed_url
         context['thumbnail'] = thumbnail
+        context['domain'] = Site.objects.get_current().domain
         return context
 
 

@@ -57,21 +57,19 @@
       </div>
       <div class="uk-width-1-3@m">
         <h3 class="uk-heading-line heading"><span>{% trans 'Watch and Share' %}</span></h3>
-        {% with request.get_full_path|urlencode as host %}
         <div class="uk-background-muted uk-padding-small uk-margin" uk-sticky="media: 640">
           <div id="links">
             <div>
               <a href="{{ recipe.url }}" target="_blank" uk-icon="icon: youtube; ratio: 1.3" uk-tooltip="title: {% trans 'Watch on YouTube'%}; pos: bottom"></a>
             </div>
             <div>
-              <a href="https://www.facebook.com/sharer/sharer.php?u={% get_setting 'VIRTUAL_HOST' %}{{ host }}" target="_blank" uk-icon="icon: facebook; ratio:1.3" uk-tooltip="title: {% trans 'Share on Facebook' %}; pos: bottom"></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ domain }}{{ request.get_full_path|urlencode }}" target="_blank" uk-icon="icon: facebook; ratio:1.3" uk-tooltip="title: {% trans 'Share on Facebook' %}; pos: bottom"></a>
             </div>
             <div>
               <a id="subscribe" target="_blank" uk-tooltip="title: {% trans 'Subscribe to Chị Chinh' %}; pos: bottom"><span>{% trans 'SUBSCRIBE' %}</span></a>
             </div>
           </div>
         </div>
-        {% endwith %}
         {% if related %}
         <div class="uk-margin-large">
           <h3 class="uk-heading-line heading"><span>{% trans 'Related' %}</span></h3>

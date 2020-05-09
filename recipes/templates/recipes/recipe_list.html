@@ -1,6 +1,5 @@
 {% extends "recipes/base.html" %}
-{% load i18n chi_chinh_extras %}
-{% load render_bundle from webpack_loader %}
+{% load static i18n chi_chinh_extras %}
 {% block head %}
 <script type="text/javascript" src="{% url 'js-catalog' %}"></script>
 {% endblock %}
@@ -16,7 +15,7 @@
     </div>
   </div>
   <div id="recipes">
-    {% render_bundle 'recipes' %}
+    <script src="{% static 'bundles/recipes.js' %}"></script>
   </div>
 </section>
 {% get_current_language as LANGUAGE_CODE %}

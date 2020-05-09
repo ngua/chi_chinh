@@ -34,8 +34,7 @@ class CreateCronJobTest(DramatiqTestCase):
             self.cron_job.next_scheduled > timezone.now()
         )
         self.assertTrue(
-            self.cron_job.next_scheduled - timezone.now() <
-            timedelta(minutes=1)
+            self.cron_job.next_scheduled - timezone.now() < timedelta(minutes=1)
         )
 
 

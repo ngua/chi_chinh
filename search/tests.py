@@ -9,15 +9,15 @@ class SearchTestCase(TestCase):
         cat2 = Category.objects.create(name_en='Vietnamese')
         cat2.name_vn = 'Việt'
         self.recipe1 = Recipe.objects.create(
-                name='Tortillas',
-                description='',
-                picture='test.png',
-            )
+            name='Tortillas',
+            description='',
+            picture='test.png',
+        )
         self.recipe2 = Recipe.objects.create(
-                name='Mì xào',
-                description='This is Vietnamese food.',
-                picture='test.png',
-            )
+            name='Mì xào',
+            description='This is Vietnamese food.',
+            picture='test.png',
+        )
         self.recipe1.categories.add(cat1)
         self.recipe2.categories.add(cat2)
 

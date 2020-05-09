@@ -10,17 +10,17 @@ class RecipeViewTestCase(APITestCase):
         for name in 'One', 'Two':
             Category.objects.create(name=name)
         self.recipe_one = Recipe.objects.create(
-                name='test',
-                description=name,
-                picture='test.png',
-                url=f'https://youtube.com/watch?v={self.yt_id}'
-            )
+            name='test',
+            description=name,
+            picture='test.png',
+            url=f'https://youtube.com/watch?v={self.yt_id}'
+        )
         self.recipe_two = Recipe.objects.create(
-                name='test two',
-                description=name,
-                picture='test.png',
-                url=f'https://www.youtube.com/watch?v={self.yt_id}'
-            )
+            name='test two',
+            description=name,
+            picture='test.png',
+            url=f'https://www.youtube.com/watch?v={self.yt_id}'
+        )
         self.recipe_one.categories.add(Category.objects.first())
         for category in Category.objects.all():
             self.recipe_two.categories.add(category)

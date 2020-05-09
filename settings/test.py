@@ -2,7 +2,7 @@ from .base import *
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DRAMATIQ_BROKER={
+DRAMATIQ_BROKER = {
     "BROKER": "dramatiq.brokers.stub.StubBroker",
     "OPTIONS": {},
     "MIDDLEWARE": [

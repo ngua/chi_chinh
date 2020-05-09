@@ -1,4 +1,3 @@
-import os
 import re
 from django.db import models
 from django.conf import settings
@@ -79,7 +78,7 @@ class Recipe(models.Model):
     def get_embed_url(self):
         pattern = re.compile(
             r'(https://)(?:www\.)?(youtube\.com)/(?:watch\?.*?'
-            '(?=v=)v=|v/|.+\?v=)?([^&=%\?]{11})'
+            r'(?=v=)v=|v/|.+\?v=)?([^&=%\?]{11})'
         )
         m = re.match(pattern, self.url)
         try:
@@ -123,20 +122,4 @@ class Recipe(models.Model):
 
 @receiver(signals.post_delete, sender=Recipe)
 def auto_delete_pic(sender, instance, **kwargs):
-    if instance.picture and os.path.isfile(instance.picture.path):
-        os.remove(instance.picture.path)
-
-
-@receiver(signals.pre_save, sender=Recipe)
-def remove_updated_pic(sender, instance, **kwargs):
-    if not instance.pk:
-        return
-
-    try:
-        old = Recipe.objects.get(id=instance.pk).picture
-    except Recipe.DoesNotExist:
-        return
-
-    new = instance.picture
-    if new != old and os.path.isfile(new):
-        os.remove(old)
+    instance.picture.delete(save=False)
