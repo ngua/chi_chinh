@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'django.contrib.postgres',
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -85,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chi_chinh.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -99,9 +99,6 @@ DATABASES = {
         'PORT': os.environ.get('SQL_PORT', '5432'),
     }
 }
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -120,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -146,7 +142,6 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -166,7 +161,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 RECIPE_PIC_PATH = 'recipe'
 
-
 # Email settings
 
 EMAIL_HOST = 'smtp.gmail.com'
@@ -178,7 +172,6 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Redis uri for caching, dramatiq, etc...
 
-# REDIS_URI = 'redis://redis:6379'
 REDIS_URI = os.environ.get('REDIS_URI')
 
 # Rest framework settings
