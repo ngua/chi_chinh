@@ -12,7 +12,7 @@
           <h1 class="uk-margin-top uk-margin-small-bottom uk-margin-remove-adjacent">{% trans 'AUTHENTIC COOKING' %}</h1>
           <p>{% trans 'New recipes every week!' %}</p>
           <a href="{% url 'recipes' %}" class="uk-button uk-button-default uk-margin-top">{{ see_more }}</a>
-          <a href="" class="uk-button uk-button-default uk-margin-top">{{ subscribe }}</a>
+          <a href="{{ sub_url }}" class="uk-button uk-button-default uk-margin-top">{{ subscribe }}</a>
         </div>
       </div>
     </div>

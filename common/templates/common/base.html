@@ -43,8 +43,8 @@
                     <li><a href="{% url 'contact' %}">{{ contact }}</a></li>
                     <li><a href="{% url 'about' %}">{{ about }}</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg">{{ channel }}</a></li>
-                    <li><a href="#">{{ subscribe }}</a></li>
+                    <li><a href="{{ channel_url }}">{{ channel }}</a></li>
+                    <li><a href="{{ sub_url }}">{{ subscribe }}</a></li>
                   </ul>
                 </div>
               </li>
@@ -54,7 +54,7 @@
             <a id="brand" class="uk-navbar-item uk-logo" href="{% url 'index' %}" title="Logo">Chị<img src="{% static 'img/logo.png' %}" alt="">Chinh </a>
           </div>
           <div class="uk-navbar-right nav-overlay">
-            <a class="uk-visible@s nav-links" href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg" uk-icon="youtube"></a>
+            <a class="uk-visible@s nav-links" href="{{ channel_url }}" uk-icon="youtube"></a>
             <a class="uk-visible@s nav-links" href="#" uk-icon="facebook"></a>
             <a class="uk-navbar-toggle uk-visible@m" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
             <div class="uk-navbar-item">
@@ -90,8 +90,8 @@
             <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'recipes' %}">{{ recipes }}</a></li>
             <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'contact' %}">{{ contact }}</a></li>
             <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'about' %}">{{ about }}</a></li>
-            <li><a class="uk-button uk-button-text uk-button-small@s" href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg">{{ channel }}</a></li>
-            <li><a class="uk-button uk-button-text uk-button-small@s" href="#">{{ subscribe }}</a></li>
+            <li><a class="uk-button uk-button-text uk-button-small@s" href="{{ channel_url }}">{{ channel }}</a></li>
+            <li><a class="uk-button uk-button-text uk-button-small@s" href="{{ sub_url }}">{{ subscribe }}</a></li>
           </ul>
         </nav>
       </div>
@@ -125,10 +125,10 @@
           </div>
           <div class="uk-width-2-5@m">
             <div class="uk-inline">
-              <a href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg" class="uk-icon-button" uk-icon="youtube"></a>
+              <a href="{{ channel_url }}" class="uk-icon-button" uk-icon="youtube"></a>
               <a href="#" class="uk-icon-button" uk-icon="facebook"></a>
-              <a href="https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg" class="uk-icon-button" uk-icon="mail"></a>
-              <a class="" href="">{{ subscribe|upper }}</a>
+              <a href="" class="uk-icon-button" uk-icon="mail"></a>
+              <a class="" href="{{ sub_url }}">{{ subscribe|upper }}</a>
             </div>
             <div class="uk-inline">
             </div>
@@ -151,16 +151,16 @@
             <hr>
           </li>
           <li class="uk-parent">
-            <a href="">{{ channel }}</a>
+            <a href="{{ channel_url }}">{{ channel }}</a>
             <ul class="uk-nav-sub">
-              <li><a href="{% url 'recipes' %}">{{ subscribe }}</a></li>
+              <li><a href="{{ sub_url }}">{{ subscribe }}</a></li>
             </ul>
             <hr>
           </li>
         </ul>
         <h3 class="heading">Chị Chinh</h3>
         <div class="uk-inline">
-          <a class="" href="" uk-icon="youtube"></a>
+          <a class="{{ channel_url }}" href="" uk-icon="youtube"></a>
           <a class="" href="" uk-icon="facebook"></a>
         </div>
       </div>
