@@ -30,6 +30,7 @@ services:
 
   redis:
     command: ['redis-server', '/etc/redis/redis.conf']
+    user: "1001"
     volumes:
       - redis_data:/var/libredis/data
       - ./redis/redis.conf:/etc/redis/redis.conf
