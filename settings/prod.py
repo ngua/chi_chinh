@@ -4,6 +4,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from .base import *
 
 DEBUG = False
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
+
 INSTALLED_APPS = [
     'jet',
     'modeltranslation',

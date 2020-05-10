@@ -4,9 +4,15 @@ from .tasks import mail_admins_task
 
 
 class ContactSerializer(serializers.ModelSerializer):
-    phone = serializers.CharField(allow_blank=True, required=False)
+    phone = serializers.CharField(allow_blank=True, required=False)  # Honeypot
 
     def send_admin_mail(self, data):
+        """
+        Sends email to admin's defined in settings following successful POST
+        to api endpoint. Calls dramatiq actor defined in tasks.py
+
+        :param OrderedDict data: data from POST request
+        """
         name = data['name']
         message = data['message']
         mail_admins_task.send(
@@ -15,6 +21,14 @@ class ContactSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, data):
+        """
+        Overrides parent method to checks serializer honeypot. If hidden
+        `phone` field contains data or is missing from POST request, raises
+        exception
+
+        :param OrderedDict data: data from POST request
+        :raise ValidationError:
+        """
         if data['phone']:
             raise serializers.ValidationError('Rejected')
         return data

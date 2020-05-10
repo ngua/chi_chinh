@@ -21,6 +21,11 @@ WORKDIR /app
 COPY . /app
 COPY ./entrypoint.sh /app/entrypoint.sh
 
+# Django raises a permissions exception when trying to write migrations to flatpages, necessary for django modeltranslation
+# Using MIGRATION_MODULES (i.e. using user-writable app directory for flatpage migrations) in settings fails to write tables to db
+# Subclassing flatpage model throws an error with modeltranslation
+# Other option would be virtualenv inside container. Seems like overkill
+# Unecessary in deployment at any rate as db is not flushed after build
 RUN chown -R $USERNAME:$USERNAME /usr/local/lib/python3.8/site-packages/
 RUN chown -R $USERNAME:$USERNAME /app
 USER $USERNAME

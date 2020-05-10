@@ -13,6 +13,12 @@ from .tasks import unmark_new_task
 
 class RecipeManager(models.Manager):
     def archive(self):
+        """
+        Returns list of model instance creation dates in descending order for
+        use in template.
+
+        :returns list: list of instance creation dates
+        """
         return [
             date for date in self.dates(
                 'created', 'month', order='DESC'
@@ -21,6 +27,12 @@ class RecipeManager(models.Manager):
 
     @staticmethod
     def all_categories():
+        """
+        Filters all Category instances with at least one relation m2m relation
+        with Recipe instance.
+
+        :returns QuerySet: Category instances
+        """
         return Category.objects.filter(recipe__isnull=False).distinct()
 
 
@@ -64,6 +76,14 @@ class Recipe(models.Model):
         )
 
     def save(self, *args, **kwargs):
+        """
+        Overrides save method in order to create url slug, checking for
+        instance id attribute to avoid later changing slug when instance
+        name changes (can cause 404s)
+        Also creates dramatiq task to set new attribute to false after
+        one week delay
+
+        """
         create_task = False
         if not self.id:
             self.slug = slugify(self.name)
@@ -76,6 +96,15 @@ class Recipe(models.Model):
             )
 
     def get_embed_url(self):
+        """
+        Attempts to match url attribute against YouTube domains and query
+        params in order generate both embed video url as well as YT's
+        automatically generated video thumbnails.
+
+        :returns tuple: if regex successful, a tuple of strings. Otherwise,
+            tuple of two NoneType instances, as this method is always expected
+            to always return a pair of values
+        """
         pattern = re.compile(
             r'(https://)(?:www\.)?(youtube\.com)/(?:watch\?.*?'
             r'(?=v=)v=|v/|.+\?v=)?([^&=%\?]{11})'
@@ -89,6 +118,17 @@ class Recipe(models.Model):
             return None, None
 
     def get_random_related(self):
+        """
+        If they exist, attempts to find one Recipe instance belonging to the
+        same category for each of object's m2m relations with Category objects.
+
+        TODO: Replace order_by('?') with more efficient algorithm to find
+        random db rows - highly inefficient and scales really poorly.
+
+        :returns dict: with Category instance names as keys and Recipe objects
+            as values
+        """
+
         related = []
         categories = []
         for category in self.categories.all():
@@ -106,6 +146,10 @@ class Recipe(models.Model):
         )
 
     def display_categories(self):
+        """
+        Displays comma-separated string representation of all related Category
+        instances. For use in admin interface.
+        """
         return ', '.join([str(category) for category in self.categories.all()])
 
     def __repr__(self):

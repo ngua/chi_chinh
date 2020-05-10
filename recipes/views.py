@@ -32,6 +32,11 @@ class RecipeListAPIView(generics.ListAPIView):
     pagination_class = PageNumberPaginator
 
     def get(self, request, **kwargs):
+        """
+        Overrides parent method in order to insert
+        all Category instances with at least one m2m relation
+        with a Recipe instance
+        """
         response = super().get(request, **kwargs)
         all_categories = Recipe.objects.all_categories()
         serializer = CategorySerializer(all_categories, many=True)
@@ -44,6 +49,11 @@ class RecipeDetailView(DetailView):
     model = Recipe
 
     def get_context_data(self, **kwargs):
+        """
+        Inserts additional context, as well as one random recipe belonging
+        to each of the same Category instance for each of the instance's
+        related categories.
+        """
         context = super().get_context_data(**kwargs)
         related = self.object.get_random_related()
         embed_url, thumbnail = self.object.get_embed_url()

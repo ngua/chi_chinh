@@ -52,5 +52,7 @@ COPY --from=builder /static/styles $APP_HOME/static/styles/
 RUN chown -R $USERNAME:$USERNAME $APP_HOME
 RUN chown -R $USERNAME:$USERNAME $APP_HOME/staticfiles
 RUN chown -R $USERNAME:$USERNAME $APP_HOME/mediafiles
+# Cannot dockerignore this directory, needed for build stage above
+RUN rm -r $APP_HOME/static/src/
 
 USER $USERNAME

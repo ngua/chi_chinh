@@ -16,17 +16,12 @@ from django.utils.translation import gettext_lazy as _
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'testserver']
-
 
 # Application definition
 
@@ -79,6 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'common.context_processors.channel_url',
+                'common.context_processors.sub_url',
             ],
         },
     },
@@ -157,7 +154,6 @@ STATICFILES_FINDERS = (
 
 # Media settings
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 RECIPE_PIC_PATH = 'recipe'
 
@@ -169,6 +165,10 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Sites
+
+SITE_ID = 1
 
 # Redis uri for caching, dramatiq, etc...
 
@@ -194,8 +194,10 @@ ADMIN_SITE_HEADER = 'Chị Chinh'
 ADMIN_SITE_TITLE = ADMIN_SITE_HEADER
 
 # Settings allowed to be exported to templates
+CHANNEL_URL = 'https://www.youtube.com/channel/UC-gVoA8riBJ0kLte8-fBYtg'
+SUBSCRIBE_URL = f'{CHANNEL_URL}/?sub_confirmation=1'
 
-SETTINGS_EXPORT = []
+SETTINGS_EXPORT = ('CHANNEL_URL', 'SUBSCRIBE_URL')
 
 # Dramatiq settings
 
@@ -265,7 +267,3 @@ BLEACH_ALLOWED_STYLES = [
 ]
 BLEACH_STRIP_TAGS = True
 BLEACH_DEFAULT_WIDGET = 'ckeditor.widgets.CKEditorWidget'
-
-# Sites
-
-SITE_ID = 1

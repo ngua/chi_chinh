@@ -13,6 +13,15 @@ class RecipeSearchListView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
+        """
+        Searches for trigrams matching query in Recipe instance's
+        name, description, and categories. Low similarity required
+        for fuzzy searches of Vietnamese characters without diacritics,
+        e.g. 'Việt' --> 'viet'
+
+        TODO Improve search efficiency and speed - dedicated search vector
+        model field and/or gin index
+       """
         qs = Recipe.objects.all()
         q = self.request.GET.get('q')
         if q:
@@ -31,6 +40,10 @@ class RecipeSearchListView(ListView):
         return qs
 
     def get_context_data(self, **kwargs):
+        """
+        Overrides parent method to insert additional context for use in
+        template - q (original search query) and total number of results
+        """
         context = super().get_context_data(**kwargs)
         context['query'] = self.q
         context['total'] = self.total
