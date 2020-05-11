@@ -59,11 +59,11 @@
               {% get_available_languages as LANGUAGES %}
               {% get_language_info_list for LANGUAGES as languages %}
               {% for language in languages %}
-              <form action="{% url 'set_language' %}" id="form_header_{{ language.code}}" method="POST">{% csrf_token %}
+              <form action="{% url 'set_language' %}" id="form_{{ language.code}}" method="POST">{% csrf_token %}
                 <input name="next" type="hidden" value="{{ request.get_full_path|slice_url }}">
                 <input name="language" type="hidden" value="{{ language.code }}">
               </form>
-              <button type="submit" form="form_header_{{ language.code}}" class="uk-visible@s uk-button uk-button-text uk-margin-right {% if language.code == LANGUAGE_CODE %}uk-active{% else %}uk-text-muted{% endif %}">{{ language.code }}</button>
+              <button type="submit" form="form_{{ language.code}}" class="uk-visible@s uk-button uk-button-text uk-margin-right {% if language.code == LANGUAGE_CODE %}uk-active{% else %}uk-text-muted{% endif %}">{{ language.code }}</button>
               {% endfor %}
               <a class="uk-navbar-toggle uk-hidden@m" uk-toggle uk-navbar-toggle-icon href="#offcanvas-nav"></a>
             </div>
@@ -165,11 +165,7 @@
           {% get_available_languages as LANGUAGES %}
           {% get_language_info_list for LANGUAGES as languages %}
           {% for language in languages %}
-          <form action="{% url 'set_language' %}" id="form_offcanvas_{{ language.code}}" method="POST">{% csrf_token %}
-            <input name="next" type="hidden" value="{{ request.get_full_path|slice_url }}">
-            <input name="language" type="hidden" value="{{ language.code }}">
-          </form>
-          <button type="submit" form="form_offcanvas_{{ language.code}}" class="uk-button uk-button-text">{{ language.code }}</button>
+          <button type="submit" form="form_{{ language.code}}" class="uk-button uk-button-text">{{ language.code }}</button>
           {% endfor %}
         </div>
       </div>
