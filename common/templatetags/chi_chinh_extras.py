@@ -21,9 +21,14 @@ def get_setting(name):
     return getattr(settings, name, '')
 
 
-@register.inclusion_tag('common/tags/lang_form.html')
+@register.inclusion_tag('common/tags/lang_form.html', takes_context=True)
 def lang_form(id_, selector, **kwargs):
-    return {'id': id_, 'selector': selector, 'kwargs': kwargs}
+    return {
+        'id': id_,
+        'selector': selector,
+        'kwargs': kwargs,
+        'csrf': context.get('csrf_token', '')
+    }
 
 
 @register.inclusion_tag('common/tags/accordion.html')
