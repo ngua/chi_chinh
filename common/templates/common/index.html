@@ -1,8 +1,7 @@
 {% extends "common/base.html" %}
-{% load static cache i18n chi_chinh_extras %}
+{% load static i18n chi_chinh_extras %}
 {% block title %}{{ home }}{% endblock %}
 {% block content %}
-{% cache 500 content %}
 <section class="uk-section uk-section-small">
   <div class="uk-container">
     <div class="uk-height-large uk-cover-container">
@@ -95,5 +94,4 @@
         </div>
       </div>
 </section>
-{% endcache %}
 {% endblock content %}
