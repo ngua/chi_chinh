@@ -29,7 +29,7 @@ services:
       - app
 
   redis:
-    command: ['redis-server', '/etc/redis/redis.conf']
+    command: ['redis-server', '/etc/redis/redis.conf', '--port', '6381']
     user: "1001"
     volumes:
       - redis_data:/var/libredis/data

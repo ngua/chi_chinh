@@ -6,7 +6,6 @@ web.dev.sh
 .vim/
 redis/
 media/
-static/img/*
 static/styles/css/*
 static/src/node_modules
 static/src/bundles
