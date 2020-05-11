@@ -1,4 +1,4 @@
-{% load static i18n chi_chinh_extras %}
+{% load static i18n cache chi_chinh_extras %}
 {% trans 'Home' as home context 'Home page' %}
 {% trans 'Recipes' as recipes %}
 {% trans 'Contact' as contact %}
@@ -28,6 +28,7 @@
     <header id="header" uk-sticky="show-on-up: true; animation: uk-animation-fade; media: @l">
       <div class="uk-container">
         <nav id="navbar" uk-navbar="mode: click;">
+          {% cache 900 nav %}
           <div class="uk-navbar-left nav-overlay uk-visible@m">
             <ul class="uk-navbar-nav">
               <li><a href="{% url 'index' %}" uk-icon="home"></a></li>
@@ -47,6 +48,7 @@
               </li>
             </ul>
           </div>
+          {% endcache %}
           <div class="uk-navbar-center nav-overlay">
             <a id="brand" class="uk-navbar-item uk-logo" href="{% url 'index' %}">Chị<img src="{% static 'img/logo.png' %}" alt="">Chinh </a>
           </div>
@@ -79,6 +81,7 @@
         </nav>
       </div>
     </header>
+    {% cache 900 body %}
     <main id="main" class="uk-container uk-container-xlarge">
       <div class="uk-container uk-visible@m">
         <nav id="sub-nav">
@@ -101,6 +104,8 @@
       </div>
       {% block content %}{% endblock %}
     </main>
+    {% endcache %}
+    {% cache 900 footer %}
     <footer class="uk-section uk-section-small uk-section-muted">
       <div class="uk-container">
         <div class="uk-grid uk-grid-large uk-grid-divider" uk-grid>
@@ -133,6 +138,7 @@
         </div>
       </div>
     </footer>
+    {% endcache %}
     <div id="offcanvas-nav" uk-offcanvas>
       <div class="uk-background-muted uk-dark uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
         <button class="uk-offcanvas-close uk-close" type="button" uk-close></button>
