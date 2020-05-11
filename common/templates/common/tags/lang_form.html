@@ -1,0 +1,11 @@
+{% load i18n chi_chinh_extras %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+{% for language in languages %}
+<form action="{% url 'set_language' %}" id="form_{{ language.code}}" class="" method="POST" style="">{% csrf_token %}
+  <input name="next" type="hidden" value="{{ request.get_full_path|slice_url }}">
+  <input name="language" type="hidden" value="{{ language.code }}">
+</form>
+<button type="submit" form="form_{{ language.code}}" class="{{ selector }} {% if language.code == LANGUAGE_CODE %}{{ kwargs.active }}{% else %}{{ kwargs.inactive }}{% endif %}">{{ language.code }}</button>
+{% endfor %}

@@ -21,6 +21,11 @@ def get_setting(name):
     return getattr(settings, name, '')
 
 
+@register.inclusion_tag('common/tags/lang_form.html')
+def lang_form(selector, **kwargs):
+    return {'selector': selector, 'kwargs': kwargs}
+
+
 @register.inclusion_tag('common/tags/accordion.html')
 def accordion(recipe):
     return {'recipe': recipe}

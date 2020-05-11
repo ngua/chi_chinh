@@ -85,7 +85,7 @@ CACHES = {
 
 COLLECTFAST_STRATEGY = 'collectfast.strategies.boto3.Boto3Strategy'
 COLLECTFAST_CACHE = 'collectfast'
-COLLECTFAST_THREADS = 20
+COLLECTFAST_THREADS = 10
 
 # Logging
 

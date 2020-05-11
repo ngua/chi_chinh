@@ -29,16 +29,12 @@
         <nav id="navbar" uk-navbar="mode: click;">
           <div class="uk-navbar-left nav-overlay uk-visible@m">
             <ul class="uk-navbar-nav">
+              <li><a href="{% url 'index' %}" uk-icon="home"></a></li>
               <li>
-                <a class="uk-button-text" href="{% url 'index' %}" title="Subscribe">{{ home }}</a>
-              </li>
-              <li>
-                <a class="uk-button-text" href="{% url 'recipes' %}" title="Sign Up">{{ recipes }}</a>
-              </li>
-              <li>
-                <a class="uk-button uk-button-text" type="button">{% trans 'More' %}</a>
+                <a uk-icon="more"></a>
                 <div uk-dropdown>
                   <ul class="uk-nav uk-dropdown-nav">
+                    <li><a href="{% url 'recipes' %}">{{ recipes }}</a></li>
                     <li><a href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
                     <li><a href="{% url 'contact' %}">{{ contact }}</a></li>
                     <li><a href="{% url 'about' %}">{{ about }}</a></li>
@@ -51,23 +47,14 @@
             </ul>
           </div>
           <div class="uk-navbar-center nav-overlay">
-            <a id="brand" class="uk-navbar-item uk-logo" href="{% url 'index' %}" title="Logo">Chị<img src="{% static 'img/logo.png' %}" alt="">Chinh </a>
+            <a id="brand" class="uk-navbar-item uk-logo" href="{% url 'index' %}">Chị<img src="{% static 'img/logo.png' %}" alt="">Chinh </a>
           </div>
           <div class="uk-navbar-right nav-overlay">
-            <a class="uk-visible@s nav-links" href="{{ channel_url }}" uk-icon="youtube"></a>
-            <a class="uk-visible@s nav-links" href="#" uk-icon="facebook"></a>
+            <a target="_blank" class="uk-visible@s nav-links" href="{{ channel_url }}" uk-icon="youtube"></a>
+            <a target="_blank" class="uk-visible@s nav-links" href="https://facebook.com/nguyenngoc.mytrjnh" uk-icon="facebook"></a>
             <a class="uk-navbar-toggle uk-visible@m" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
             <div class="uk-navbar-item">
-              {% get_current_language as LANGUAGE_CODE %}
-              {% get_available_languages as LANGUAGES %}
-              {% get_language_info_list for LANGUAGES as languages %}
-              {% for language in languages %}
-              <form action="{% url 'set_language' %}" id="form_{{ language.code}}" class="" method="POST" style="">{% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.get_full_path|slice_url }}">
-                <input name="language" type="hidden" value="{{ language.code }}">
-              </form>
-              <button type="submit" form="form_{{ language.code}}" class="uk-visible@s uk-button uk-button-text uk-margin-right {% if language.code == LANGUAGE_CODE %}uk-active{% else %}uk-text-muted{% endif %}">{{ language.code }}</button>
-              {% endfor %}
+              {% lang_form 'uk-visible@s uk-button uk-button-text uk-margin-right' active='uk-active' inactive='uk-text-muted' %}
               <a class="uk-navbar-toggle uk-hidden@m" uk-toggle uk-navbar-toggle-icon href="#offcanvas-nav"></a>
             </div>
           </div>
@@ -88,6 +75,7 @@
           <ul class="uk-subnav uk-flex uk-flex-between@m">
             <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'index' %}">{{ home }}</a></li>
             <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'recipes' %}">{{ recipes }}</a></li>
+            <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'recipe-archive' %}">{{ archive }}</a></li>
             <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'contact' %}">{{ contact }}</a></li>
             <li><a class="uk-button uk-button-text uk-button-small@s" href="{% url 'about' %}">{{ about }}</a></li>
             <li><a class="uk-button uk-button-text uk-button-small@s" href="{{ channel_url }}">{{ channel }}</a></li>
@@ -125,10 +113,9 @@
           </div>
           <div class="uk-width-2-5@m">
             <div class="uk-inline">
-              <a href="{{ channel_url }}" class="uk-icon-button" uk-icon="youtube"></a>
-              <a href="#" class="uk-icon-button" uk-icon="facebook"></a>
-              <a href="" class="uk-icon-button" uk-icon="mail"></a>
-              <a class="" href="{{ sub_url }}">{{ subscribe|upper }}</a>
+              <a target="_blank" href="{{ channel_url }}" class="uk-icon-button" uk-icon="youtube"></a>
+              <a target="_blank" href="https://facebook.com/nguyenngoc.mytrjnh" class="uk-icon-button" uk-icon="facebook"></a>
+              <a target="_blank" href="{{ sub_url }}">{{ subscribe|upper }}</a>
             </div>
             <div class="uk-inline">
             </div>
@@ -160,8 +147,11 @@
         </ul>
         <h3 class="heading">Chị Chinh</h3>
         <div class="uk-inline">
-          <a class="{{ channel_url }}" href="" uk-icon="youtube"></a>
-          <a class="" href="" uk-icon="facebook"></a>
+          <a target="_blank" href="{{ channel_url }}" uk-icon="youtube"></a>
+          <a target="_blank" href="https://facebook.com/nguyenngoc.mytrjnh" uk-icon="facebook"></a>
+        </div>
+        <div class="uk-inline">
+          {% lang_form 'lang uk-button uk-button-text' %}
         </div>
       </div>
     </div>
