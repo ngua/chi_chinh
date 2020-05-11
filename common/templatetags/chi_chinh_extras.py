@@ -22,8 +22,8 @@ def get_setting(name):
 
 
 @register.inclusion_tag('common/tags/lang_form.html')
-def lang_form(selector, **kwargs):
-    return {'selector': selector, 'kwargs': kwargs}
+def lang_form(id_, selector, **kwargs):
+    return {'id': id_, 'selector': selector, 'kwargs': kwargs}
 
 
 @register.inclusion_tag('common/tags/accordion.html')

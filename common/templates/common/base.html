@@ -55,16 +55,7 @@
             <a target="_blank" class="uk-visible@s nav-links" href="https://facebook.com/nguyenngoc.mytrjnh" uk-icon="facebook"></a>
             <a class="uk-navbar-toggle uk-visible@m" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
             <div class="uk-navbar-item">
-              {% get_current_language as LANGUAGE_CODE %}
-              {% get_available_languages as LANGUAGES %}
-              {% get_language_info_list for LANGUAGES as languages %}
-              {% for language in languages %}
-              <form action="{% url 'set_language' %}" id="form_{{ language.code}}" class="" method="POST" style="">{% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.get_full_path|slice_url }}">
-                <input name="language" type="hidden" value="{{ language.code }}">
-              </form>
-              <button type="submit" form="form_{{ language.code}}" class="uk-visible@s uk-button uk-button-text uk-margin-right {% if language.code == LANGUAGE_CODE %}uk-active{% else %}uk-text-muted{% endif %}">{{ language.code }}</button>
-              {% endfor %}
+              {% lang_form 'header' 'uk-visible@s uk-button uk-button-text uk-margin-right' active='uk-active' inactive='uk-text-muted' %}
               <a class="uk-navbar-toggle uk-hidden@m" uk-toggle uk-navbar-toggle-icon href="#offcanvas-nav"></a>
             </div>
           </div>
@@ -161,7 +152,7 @@
           <a target="_blank" href="https://facebook.com/nguyenngoc.mytrjnh" uk-icon="facebook"></a>
         </div>
         <div class="uk-inline">
-          {% lang_form 'lang uk-button uk-button-text' %}
+          {% lang_form 'footer' 'lang uk-button uk-button-text' %}
         </div>
       </div>
     </div>
