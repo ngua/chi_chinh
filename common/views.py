@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from recipes.models import Recipe
 
@@ -10,7 +10,7 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 
 @cache_page(CACHE_TTL)
-@csrf_protect
+@csrf_exempt
 def index(request):
     latest = Recipe.objects.order_by('-created')[:5]
     featured_recipes = Recipe.objects.filter(featured=True)
