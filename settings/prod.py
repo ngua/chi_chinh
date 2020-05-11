@@ -6,7 +6,6 @@ from .base import *
 DEBUG = False
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
 SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 
 INSTALLED_APPS = [
     'jet',
