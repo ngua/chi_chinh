@@ -23,6 +23,9 @@ services:
       - POSTGRES_USER=chichinh
       - POSTGRES_PASSWORD=chichinh
       - POSTGRES_DB=chichinh_dev
+  redis:
+    ports:
+      - "6380:6380"
 
 volumes:
   postgres_data:
